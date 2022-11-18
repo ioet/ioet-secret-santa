@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { Button, Typography } from '@mui/material'
 
 function App() {
   return (
-    <div>
-      IOET Secret Santa
-    </div>
+    <>
+      <Typography variant="h1">IOET Secret Santa</Typography>
+    </>
   )
 }
 
