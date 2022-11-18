@@ -1,10 +1,14 @@
-import { Button, Typography } from '@mui/material'
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Login from './pages/Login';
 
 function App() {
   return (
-    <>
-      <Typography variant="h1">IOET Secret Santa</Typography>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path='/' element={<h1>IOET Secret Santa</h1>} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
