@@ -1,6 +1,6 @@
 import { Button, Box, Grid } from '@mui/material'
 import IOETLogo from '../assets/ioet.png'
-
+import BackgoundImage from '../assets/christmas_background.gif'
 
 const Login = () => {
   return (
@@ -10,7 +10,7 @@ const Login = () => {
       alignItems="center"
       justifyContent="center"
       style={{ minHeight: '97vh' }}
-      sx={{ backgroundColor: 'green' }}
+      sx={{ backgroundImage: `url(${BackgoundImage})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}
     >
       <Box
         component='img'
