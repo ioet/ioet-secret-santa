@@ -2,7 +2,11 @@ import { Button, Box, Grid } from '@mui/material'
 import IOETLogo from '../assets/ioet.png'
 import BackgoundImage from '../assets/christmas_background.gif'
 
-const Login = () => {
+interface Props {
+  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Login = ({ setIsLogged }: Props) => {
   return (
     <Grid
       container
