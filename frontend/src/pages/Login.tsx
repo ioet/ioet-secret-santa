@@ -18,7 +18,7 @@ const Login = () => {
         src={IOETLogo}
       />
       <Button variant='contained'>Login</Button>
-    </Grid>
+    </Grid >
   )
 }
 

@@ -1,14 +1,20 @@
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { useState, useEffect } from 'react'
 import Login from './pages/Login';
+import Home from './pages/Home';
+
 
 function App() {
+
+  const [isLogged, setIsLogged] = useState(true);
+
+  useEffect(() => {
+
+  }, []);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path='/' element={<h1>IOET Secret Santa</h1>} />
-      </Routes>
-    </BrowserRouter>
+    isLogged
+      ? <Home />
+      : <Login />
   )
 }
 
