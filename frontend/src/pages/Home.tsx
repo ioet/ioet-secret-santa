@@ -57,7 +57,7 @@ const Home = ({ isRegistered, setIsRegistered }: Props) => {
                 alignItems="center"
                 justifyContent="center"
               >
-                <Button variant="contained" sx={{ ml: 1.5, width: "325px", height: "100px" }}>VIEW</Button>
+                <Button variant="contained" sx={{ ml: 1.5, width: "325px", height: "100px" }}>{isRegistered ? 'VIEW' : 'REGISTER'}</Button>
               </Grid>
             </Grid>
           </Grid>

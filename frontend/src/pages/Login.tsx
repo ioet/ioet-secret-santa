@@ -21,7 +21,7 @@ const Login = ({ setIsLogged }: Props) => {
         alt='ioet logo.'
         src={IOETLogo}
       />
-      <Button variant='contained'>Login</Button>
+      <Button variant='contained'>LOGIN</Button>
     </Grid >
   )
 }
