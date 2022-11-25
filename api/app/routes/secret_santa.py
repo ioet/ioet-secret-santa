@@ -1,9 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from app.services import calculate_secret_santa_results, get_data_by_attribute, save_register
 
-
 router = APIRouter()
-
 
 @router.post("/{region}")
 async def calculate_results(region: str) -> dict:
