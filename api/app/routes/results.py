@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from app.services import get_data, get_data_by_name
+from app.services import get_data, get_data_by_email, get_data_by_region
 
 
 router = APIRouter()
@@ -13,9 +13,17 @@ async def get_results() -> dict:
         raise HTTPException(status_code=500, detail='There is no data for the results, please generate it first.')
 
 
-@router.get("/{name}")
-async def get_result_by_name(name: str) -> dict:
-    result = get_data_by_name(document='secret-santa', name=name)
+@router.get("/region/{region}")
+async def get_result_by_region(region: str) -> dict:
+    result = get_data_by_region(document='secret-santa', region=region)
+    if not result:
+        raise HTTPException(status_code=500, detail=f'region entered does not exist.')
+    return result
+
+
+@router.get("/email/{email}")
+async def get_result_by_email(email: str) -> dict:
+    result = get_data_by_email(document='secret-santa', email=email)
     if not result:
         raise HTTPException(status_code=500, detail=f'Name entered does not exist.')
     return result
