@@ -2,7 +2,6 @@ from fastapi import APIRouter, HTTPException, Request
 from datetime import datetime
 from app.services import get_data, get_data_by_attribute, save_register
 
-
 router = APIRouter()
 
 
