@@ -1,7 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from app.services import get_data, get_data_by_email, get_data_by_region
 
-
 router = APIRouter()
 
 
