@@ -9,7 +9,7 @@ import Theme from './theme'
 function App() {
 
   const [isLogged, setIsLogged] = useState(true);
-  const [isRegistered, setIsRegistered] = useState(true);
+  const [isRegistered, setIsRegistered] = useState(false);
 
   useEffect(() => {
 

@@ -1,4 +1,4 @@
-import { Typography, Grid, Button } from "@mui/material";
+import { Typography, Grid, Button, Box } from "@mui/material";
 import { useState } from 'react';
 import Countdown from 'react-countdown';
 import Appbar from "../components/Appbar";
@@ -17,53 +17,14 @@ const Home = ({ isRegistered, setIsRegistered }: Props) => {
   const [gameDeadline] = useState(envManager.GAME_DEADLINE);
 
   return (
-    <>
-      <Appbar />
-      <Grid
-        container
-        spacing={2}
-        width="100vw"
-        height="80vh"
-        alignItems="center"
-        justifyContent="center"
-        sx={{ marginTop: 10 }}
-      >
-        <Grid item width={{ sm: '100vw', md: '60vw' }}>
-          {
-            isRegistered
-              ? <SecretSanta />
-              : <RegistrationForm />
-          }
-        </Grid>
-        <Grid item width={{ sm: '100vw', md: '40vw' }}>
-          <Grid container width="100%" spacing={2}>
-            <Grid item width="100%">
-              {
-                isRegistered
-                  ? <Grid item width={{ sm: '100vw', md: '39vw' }} textAlign="center">
-                    <Typography variant="h6">DAYS UNTIL SECRET SANTA BEGIN</Typography>
-                    <Countdown date={gameDeadline} renderer={renderer} />
-                  </Grid>
-                  : <Grid item width={{ sm: '100vw', md: '39vw' }} textAlign="center">
-                    <Typography variant="h6">DAYS UNTIL REGISTRATION ENDS</Typography>
-                    <Countdown date={registrationDeadline} renderer={renderer} />
-                  </Grid>
-              }
-            </Grid>
-            <Grid item width="100%" >
-              <Grid
-                container
-                width="100%"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Button variant="contained" sx={{ ml: 1.5, width: "325px", height: "100px" }}>{isRegistered ? 'VIEW' : 'REGISTER'}</Button>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-    </>
+    <Box sx={{ width: '100%', height: '100vh', background: 'linear-gradient(210deg, rgba(255,128,128,1) 1%, rgba(255,0,0,1) 100%);' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', height: '100vh' }} width={{ sm: '100%', md: '50%' }}>
+        <Box sx={{ display: 'block', width: '100%', textAlign: 'center' }}>
+          <Typography variant="h2" sx={{ color: 'white', p: 5, wordWrap: "break-word" }}>Days until registration ends!</Typography>
+          <Button variant="contained">Register</Button>
+        </Box>
+      </Box>
+    </Box>
   );
 }
 
