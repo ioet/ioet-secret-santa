@@ -13,7 +13,6 @@ async def get_players() -> list:
     except Exception:
         raise HTTPException(status_code=500, detail=f'There are no players.')
 
-
 @router.get('/{region}')
 async def get_players_by_region(region: str) -> list:
     try:
