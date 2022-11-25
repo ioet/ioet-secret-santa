@@ -1,7 +1,6 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from datetime import datetime
-from app.services import get_data, save_register
-
+from app.services import get_data, get_data_by_attribute, save_register
 
 router = APIRouter()
 
@@ -13,11 +12,27 @@ async def get_players() -> list:
     except Exception:
         raise HTTPException(status_code=500, detail=f'There are no players.')
 
-
-@router.post('/{player}')
-async def create_player(player: str) -> dict:
+@router.get('/{region}')
+async def get_players_by_region(region: str) -> list:
     try:
-        save_register(document='players', registry={'name': player, 'timestamp': str(datetime.now())}, key='name')
-        return {'detail': " Successfully created"}
+        return get_data_by_attribute(document='players', attribute="region", value=region)
     except Exception:
-        raise HTTPException(status_code=500, detail=f'Problem while creating the player.')
+        raise HTTPException(status_code=500, detail=f'There are no players.')
+
+
+@router.post('/')
+async def create_player(req: Request) -> dict:
+    try:
+        body = await req.json()
+        registry = {
+            'region': body.get("region", "").strip().lower(),
+            'wishes': body.get("wishes"),
+            'name': body.get("name"),
+            'email': body.get("email"),
+            'key': body.get("email").split('@')[0].replace('.', '_').lower(),
+            'timestamp': str(datetime.now())
+        }
+        save_register(document='players', registry=registry, key="key")
+        return {'detail': "Successfully created"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f'Problem while creating the player. {str(e)}')
