@@ -12,7 +12,6 @@ async def get_results() -> dict:
     except Exception:
         raise HTTPException(status_code=500, detail='There is no data for the results, please generate it first.')
 
-
 @router.get("/region/{region}")
 async def get_result_by_region(region: str) -> dict:
     result = get_data_by_region(document='secret-santa', region=region)
