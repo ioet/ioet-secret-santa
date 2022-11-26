@@ -1,14 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import Depends, APIRouter, HTTPException
 from aiohttp import ClientSession
 
 from app.services.auth import get_session, auth_with_internal_service
 
 router = APIRouter()
-
-
-@router.get("/")
-async def home() -> dict:
-    return {'Ioet Secret-Santa backend': 'v0.1.0'}
 
 
 @router.get("/api/authz/user-permissions")

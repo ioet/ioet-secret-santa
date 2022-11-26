@@ -32,6 +32,7 @@ async def create_player(req: Request) -> dict:
             'key': body.get("email").split('@')[0].replace('.', '_').lower(),
             'timestamp': str(datetime.now())
         }
+
         save_register(document='players', registry=registry, key="key")
         return {'detail': "Successfully created"}
     except Exception as e:

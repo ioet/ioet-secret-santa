@@ -1,10 +1,14 @@
-import { Button, Box, Grid } from '@mui/material'
-import IOETLogo from '../assets/ioet.png'
-import BackgoundImage from '../assets/christmas_background.gif'
+import { Button, Box, Grid } from '@mui/material';
+
+import IOETLogo from '../assets/ioet.png';
+import BackgoundImage from '../assets/christmas_background.gif';
+import envManager from "../config/envManager";
 
 interface Props {
   setIsLogged: React.Dispatch<React.SetStateAction<boolean>>
 }
+
+const loginURL = `${envManager.AUTH_URL}authn/login/${envManager.APP_NAME}`;
 
 const Login = ({ setIsLogged }: Props) => {
   return (
@@ -21,7 +25,7 @@ const Login = ({ setIsLogged }: Props) => {
         alt='ioet logo.'
         src={IOETLogo}
       />
-      <Button variant='contained'>LOGIN</Button>
+      <Button variant='contained' size="large" href={loginURL} >LOGIN</Button>
     </Grid >
   )
 }
