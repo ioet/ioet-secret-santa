@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from mangum import Mangum
+from fastapi.middleware.cors import CORSMiddleware
 from app.events import register_routers
 
 app = FastAPI(title='IOET Secret-Santa backend')
