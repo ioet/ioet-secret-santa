@@ -1,4 +1,4 @@
-import { Typography, Grid, Button, Box } from "@mui/material";
+import { Typography, Hidden, Button, Box } from "@mui/material";
 import { useState } from 'react';
 import Countdown from 'react-countdown';
 import Appbar from "../components/Appbar";
@@ -6,7 +6,7 @@ import RegistrationForm from "../components/RegistrationForm";
 import renderer from "../components/Renderer";
 import SecretSanta from "../components/SecretSanta";
 import envManager from "../config/envManager";
-import Image from ".././assets/background_santa_image.png"
+import Image from ".././assets/christmas-gifts.webp"
 
 interface Props {
   isRegistered: boolean,
@@ -36,7 +36,8 @@ const Home = ({ isRegistered, setIsRegistered }: Props) => {
           md: '50%'
         }}
         height={{
-          sm: '50vh',
+          xs: '30vh',
+          sm: '30vh',
           md: '100vh',
         }}
       >
@@ -55,7 +56,9 @@ const Home = ({ isRegistered, setIsRegistered }: Props) => {
               wordWrap: "break-word"
             }}
           >Days until registration ends!</Typography>
-          <Button variant="contained">Register</Button>
+          <Hidden only={['sm', 'xs']}>
+            <Button variant="contained">Register</Button>
+          </Hidden>
         </Box>
       </Box>
       <Box
@@ -68,7 +71,8 @@ const Home = ({ isRegistered, setIsRegistered }: Props) => {
           md: '50%'
         }}
         height={{
-          sm: '50vh',
+          xs: '70vh',
+          sm: '70vh',
           md: '100vh',
         }}
       >
@@ -79,7 +83,12 @@ const Home = ({ isRegistered, setIsRegistered }: Props) => {
             textAlign: 'center',
           }}
         >
-          <Box component="img" src={Image} sx={{ width: '350px' }} />
+          <Box component="img" src={Image} alt="Christmas gifts image" sx={{ maxWidth: '300px' }} />
+          <br></br>
+          {/* Countdown component here */}
+          <Hidden only={['md', 'lg', 'xl']}>
+            <Button variant="contained">Register</Button>
+          </Hidden>
         </Box>
       </Box>
     </Box>
