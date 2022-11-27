@@ -11,7 +11,7 @@ function App() {
   const [isRegistered, setIsRegistered] = useState(false);
 
   useEffect(() => {
-
+    //validar login y registro desde auth
   }, []);
 
   return (
