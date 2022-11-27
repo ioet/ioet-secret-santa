@@ -17,7 +17,7 @@ const Home = ({ isRegistered, setIsRegistered }: Props) => {
       {
         isRegistered
           ? null
-          : < Registration />
+          : < Registration setIsRegistered={setIsRegistered} />
       }
     </>
   );

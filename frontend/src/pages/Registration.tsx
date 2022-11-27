@@ -2,7 +2,11 @@ import { Typography, Hidden, Button, Box } from "@mui/material";
 import Image from ".././assets/christmas-gifts.webp"
 import RegistrationForm from "../components/RegistrationForm";
 
-const Registration = () => {
+interface Props {
+  setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Registration = ({ setIsRegistered }: Props) => {
   const scrollWindow = () => {
     window.scrollTo({
       top: document.documentElement.scrollHeight,
@@ -51,7 +55,7 @@ const Registration = () => {
               }}
             >The registration countdown begun!</Typography>
             <Hidden only={['sm', 'xs']}>
-              <Button onClick={scrollWindow} sx={{ color: '#A30000', bgcolor: '#fff', '&:hover': { bgcolor: '#bbb' } }}>Register</Button>
+              <Button onClick={scrollWindow} sx={{ width: '250px', color: '#A30000', bgcolor: '#fff', '&:hover': { bgcolor: '#bbb' } }}>Register</Button>
             </Hidden>
           </Box>
         </Box>
@@ -81,7 +85,7 @@ const Registration = () => {
             <br></br>
             {/* Countdown component here */}
             <Hidden only={['md', 'lg', 'xl']}>
-              <Button onClick={scrollWindow} sx={{ color: '#A30000', bgcolor: '#fff', '&:hover': { bgcolor: '#bbb' } }}>Register</Button>
+              <Button onClick={scrollWindow} sx={{ width: '250px', color: '#A30000', bgcolor: '#fff', '&:hover': { bgcolor: '#bbb' } }}>Register</Button>
             </Hidden>
           </Box>
         </Box>

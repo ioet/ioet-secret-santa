@@ -34,8 +34,8 @@ const RegistrationForm = () => {
         display='block'
         paddingX={{
           md: 10,
-          sm: 2,
-          xs: 2
+          sm: 5,
+          xs: 5
         }}
         textAlign="center"
       >
