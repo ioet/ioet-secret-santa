@@ -61,8 +61,13 @@ const SecretSanta = ({ countdown }: Props) => {
                   </Card>
                 </Box>
                 : <>
-                  <Typography variant='body1' sx={{ color: 'white' }}>Thank you for registering for the Christmas Secret Santa game! Wait until the counter reaches zero to find out who is your Secret Santa!</Typography>
-                  <Countdown date={countdown} />
+                  <Box sx={{ p: 5 }}>
+                    <Typography
+                      variant='body1'
+                      sx={{ color: 'white' }}
+                    >Thank you for registering for the Christmas Secret Santa game! Wait until the counter reaches zero to find out who is your Secret Santa!</Typography>
+                    <Countdown date={countdown} />
+                  </Box>
                 </>
             }
           </Box>
