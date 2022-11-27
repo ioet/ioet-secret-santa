@@ -1,12 +1,14 @@
 import { Typography, Hidden, Button, Box } from "@mui/material";
+import Countdown from "react-countdown";
 import Image from ".././assets/christmas-gifts.webp"
 import RegistrationForm from "../components/RegistrationForm";
 
 interface Props {
-  setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>
+  setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>,
+  countdown: any,
 }
 
-const Registration = ({ setIsRegistered }: Props) => {
+const Registration = ({ setIsRegistered, countdown }: Props) => {
   const scrollWindow = () => {
     window.scrollTo({
       top: document.documentElement.scrollHeight,
@@ -46,14 +48,22 @@ const Registration = ({ setIsRegistered }: Props) => {
               textAlign: 'center',
             }}
           >
-            <Typography
-              variant="h2"
-              sx={{
-                color: 'white',
-                p: 5,
-                wordWrap: "break-word"
-              }}
-            >The registration countdown begun!</Typography>
+            <Box padding={5}>
+              <Typography
+                variant="h2"
+                sx={{
+                  color: 'white',
+                  wordWrap: "break-word"
+                }}
+              >The registration countdown begun!</Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: 'white',
+                  wordWrap: "break-word"
+                }}
+              >Join us in the Christmas Secret Santa game.</Typography>
+            </Box>
             <Hidden only={['sm', 'xs']}>
               <Button onClick={scrollWindow} sx={{ width: '250px', color: '#A30000', bgcolor: '#fff', '&:hover': { bgcolor: '#bbb' } }}>Register</Button>
             </Hidden>
@@ -83,7 +93,7 @@ const Registration = ({ setIsRegistered }: Props) => {
           >
             <Box component="img" src={Image} alt="Christmas gifts image" sx={{ maxWidth: '300px' }} />
             <br></br>
-            {/* Countdown component here */}
+            <Countdown date={countdown} />
             <Hidden only={['md', 'lg', 'xl']}>
               <Button onClick={scrollWindow} sx={{ width: '250px', color: '#A30000', bgcolor: '#fff', '&:hover': { bgcolor: '#bbb' } }}>Register</Button>
             </Hidden>
@@ -98,7 +108,7 @@ const Registration = ({ setIsRegistered }: Props) => {
         width='100%'
         height='100vh'
       >
-        <RegistrationForm />
+        <RegistrationForm setIsRegistered={setIsRegistered} />
       </Box>
     </Box >
   )

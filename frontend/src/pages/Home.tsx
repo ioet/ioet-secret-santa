@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import SecretSanta from '../components/SecretSanta';
 import Registration from './Registration';
 import envManager from "../config/envManager";
+import SecretSanta from './SecretSanta';
 
 interface Props {
   isRegistered: boolean,
@@ -16,8 +16,8 @@ const Home = ({ isRegistered, setIsRegistered }: Props) => {
     <>
       {
         isRegistered
-          ? null
-          : < Registration setIsRegistered={setIsRegistered} />
+          ? <SecretSanta countdown={gameDeadline} />
+          : <Registration setIsRegistered={setIsRegistered} countdown={registrationDeadline} />
       }
     </>
   );

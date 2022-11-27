@@ -1,3 +1,4 @@
+import { ImportContactsOutlined } from "@mui/icons-material";
 import {
   Box,
   Select,
@@ -11,7 +12,11 @@ import {
 } from "@mui/material";
 import { useState } from 'react';
 
-const RegistrationForm = () => {
+interface Props {
+  setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const RegistrationForm = ({ setIsRegistered }: Props) => {
   const [selectedOffice, setSelectedOffice] = useState('');
   const [firstWish, setFirstWish] = useState('');
   const [secondWish, setSecondWish] = useState('');
@@ -21,8 +26,8 @@ const RegistrationForm = () => {
     setSelectedOffice(event.target.value as string);
   };
 
-  const handleSubmit = () => {
-
+  const handleSubmit = async () => {
+    setIsRegistered(true);
   }
 
   return (
