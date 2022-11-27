@@ -54,6 +54,11 @@ const Registration = ({ setIsRegistered, countdown }: Props) => {
             <Box padding={5}>
               <Typography
                 variant="h2"
+                fontSize={{
+                  xs: 45,
+                  sm: 45,
+                  md: 60
+                }}
                 sx={{
                   color: 'white',
                   wordWrap: "break-word"
@@ -98,6 +103,7 @@ const Registration = ({ setIsRegistered, countdown }: Props) => {
             <Box component="img" src={Image} alt="Christmas gifts image" sx={{ maxWidth: '300px' }} />
             <br></br>
             <Countdown date={countdown} />
+            <br></br>
             <Hidden only={['md', 'lg', 'xl']}>
               <Button onClick={scrollWindow} sx={{ width: '250px', color: '#A30000', bgcolor: '#fff', '&:hover': { bgcolor: '#bbb' } }}>Register</Button>
             </Hidden>
