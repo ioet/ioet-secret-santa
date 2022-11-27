@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { ThemeProvider } from '@mui/material';
 import Login from './pages/Login';
 import Home from './pages/Home';
 
