@@ -1,4 +1,5 @@
 import { Typography, Hidden, Button, Box } from "@mui/material";
+import { useState } from "react";
 import Countdown from "react-countdown";
 import Image from ".././assets/christmas-gifts.webp"
 import RegistrationForm from "../components/RegistrationForm";
@@ -9,6 +10,8 @@ interface Props {
 }
 
 const Registration = ({ setIsRegistered, countdown }: Props) => {
+  const [canRegister, setCanRegister] = useState(true);
+
   const scrollWindow = () => {
     window.scrollTo({
       top: document.documentElement.scrollHeight,
@@ -55,17 +58,18 @@ const Registration = ({ setIsRegistered, countdown }: Props) => {
                   color: 'white',
                   wordWrap: "break-word"
                 }}
-              >The registration countdown begun!</Typography>
+              >The registration countdown {canRegister ? 'begun!' : 'finished:('}</Typography>
               <Typography
                 variant="body1"
                 sx={{
                   color: 'white',
-                  wordWrap: "break-word"
+                  wordWrap: "break-word",
+                  opacity: `${canRegister ? '1' : '0'}`
                 }}
               >Join us in the Christmas Secret Santa game.</Typography>
             </Box>
             <Hidden only={['sm', 'xs']}>
-              <Button onClick={scrollWindow} sx={{ width: '250px', color: '#A30000', bgcolor: '#fff', '&:hover': { bgcolor: '#bbb' } }}>Register</Button>
+              <Button onClick={scrollWindow} sx={{ width: '250px', color: '#A30000', bgcolor: '#fff', '&:hover': { bgcolor: '#bbb' }, opacity: `${canRegister ? '1' : '0'}` }}>Register</Button>
             </Hidden>
           </Box>
         </Box>
@@ -100,16 +104,19 @@ const Registration = ({ setIsRegistered, countdown }: Props) => {
           </Box>
         </Box>
       </Box>
-      <Box
-        sx={{
-          display: 'grid',
-          alignContent: 'center',
-        }}
-        width='100%'
-        height='100vh'
-      >
-        <RegistrationForm setIsRegistered={setIsRegistered} />
-      </Box>
+      {
+        canRegister
+        && <Box
+          sx={{
+            display: 'grid',
+            alignContent: 'center',
+          }}
+          width='100%'
+          height='100vh'
+        >
+          <RegistrationForm setIsRegistered={setIsRegistered} />
+        </Box>
+      }
     </Box >
   )
 }
