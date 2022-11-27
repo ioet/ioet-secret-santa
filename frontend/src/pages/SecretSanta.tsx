@@ -28,7 +28,9 @@ const SecretSanta = ({ countdown }: Props) => {
           <Appbar />
           <Box sx={{ textAlign: 'center', }}>
             <Typography variant='body1' sx={{ color: 'white' }}>Thank you for registering for the Christmas Secret Santa game! Wait until the counter reaches zero to find out who is your Secret Santa!</Typography>
-            <Countdown date={countdown} />
+            <Countdown date={countdown}>
+              <h1>Se acabo el tiempo</h1>
+            </Countdown>
           </Box>
         </Box>
       </Box>
