@@ -71,9 +71,15 @@ const Admin = () => {
             }}
           >
             <Box
-              sx={{
-                width: '50%',
-                height: '100%',
+              width={{
+                xs: '100%',
+                sm: '100%',
+                md: '50%',
+              }}
+              height={{
+                xs: 'auto',
+                sm: 'auto',
+                md: '100%'
               }}
             >
               <Box
@@ -115,11 +121,16 @@ const Admin = () => {
                 </Card>
               </Box>
             </Box>
-
             <Box
-              sx={{
-                width: '50%',
-                height: '100%',
+              width={{
+                xs: '100%',
+                sm: '100%',
+                md: '50%',
+              }}
+              height={{
+                xs: 'auto',
+                sm: 'auto',
+                md: '100%'
               }}
             >
               <Box

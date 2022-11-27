@@ -1,4 +1,5 @@
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Card, CardContent, Divider } from "@mui/material";
+import { useState } from "react";
 import Countdown from "react-countdown";
 import Appbar from "../components/Appbar";
 
@@ -7,6 +8,9 @@ interface Props {
 }
 
 const SecretSanta = ({ countdown }: Props) => {
+  const [secretSanta, setSecretSanta] = useState({ 'name': 'Eliangei', 'wishes': ['1', '2', '3'] });
+  const [hasInfo, setHasInfo] = useState(false);
+
   return (
     <Box display='block' width='100vw'>
       <Box
@@ -27,10 +31,40 @@ const SecretSanta = ({ countdown }: Props) => {
         >
           <Appbar />
           <Box sx={{ textAlign: 'center', }}>
-            <Typography variant='body1' sx={{ color: 'white' }}>Thank you for registering for the Christmas Secret Santa game! Wait until the counter reaches zero to find out who is your Secret Santa!</Typography>
-            <Countdown date={countdown}>
-              <h1>Se acabo el tiempo</h1>
-            </Countdown>
+            {
+              hasInfo
+                ? <Box
+                  padding={{
+                    sm: 5,
+                    xs: 5,
+                    md: 15,
+                  }}
+                >
+                  <Card>
+                    <CardContent>
+                      <Typography variant='h4'>Your Secret Santa is:</Typography>
+                      <Divider />
+                      <Typography variant='h6' sx={{ mt: 3 }}>{secretSanta['name']}</Typography>
+                      <Box
+                        sx={{
+                          p: 5
+                        }}
+                      >
+                        <Typography textAlign='left'>Its wishes are:</Typography>
+                        {
+                          secretSanta['wishes'].map((wish) => (
+                            <Typography key={wish} textAlign='left'>- {wish}</Typography>
+                          ))
+                        }
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Box>
+                : <>
+                  <Typography variant='body1' sx={{ color: 'white' }}>Thank you for registering for the Christmas Secret Santa game! Wait until the counter reaches zero to find out who is your Secret Santa!</Typography>
+                  <Countdown date={countdown} />
+                </>
+            }
           </Box>
         </Box>
       </Box>
