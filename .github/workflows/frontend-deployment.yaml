@@ -1,0 +1,50 @@
+name: frontent secret-santa deploy workflow
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/**"
+  pull_request:
+    paths:
+      - "frontend/**"
+
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIR: frontend
+      AWS_ACCESS_KEY_ID: ${{secrets.DNS_AWS_ACCESS_KEY_ID}}
+      AWS_SECRET_ACCESS_KEY: ${{secrets.DNS_AWS_SECRET_ACCESS_KEY}}
+      AWS_REGION: "us-east-1"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Building the frontent
+        uses: yarn run build
+
+      - name: Installing packages
+        uses: yarn Install
+
+      - name: Installing packages
+        uses: yarn Install
+
+      - name: Building the app
+        uses: yarn build
+
+      - name: Uploading the app
+        uses: aws s3 cp build s3://ioet-secret-santa/ --recursive
