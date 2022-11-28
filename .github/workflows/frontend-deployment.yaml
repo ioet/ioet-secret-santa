@@ -9,6 +9,7 @@ on:
 jobs:
   cd:
     runs-on: ubuntu-latest
+
     env:
       WORKING_DIR: frontend
       AWS_ACCESS_KEY_ID: ${{secrets.DNS_AWS_ACCESS_KEY_ID}}
@@ -31,12 +32,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-
       - name: Installing packages
-        uses: yarn install
+        run: yarn install
 
       - name: Building the app
-        uses: yarn build
+        run: yarn build
 
       - name: Uploading the app
-        uses: aws s3 cp build s3://ioet-secret-santa/ --recursive
+        run: aws s3 cp build s3://ioet-secret-santa/ --recursive
