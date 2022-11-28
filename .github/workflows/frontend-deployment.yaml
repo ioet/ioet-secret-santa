@@ -33,7 +33,7 @@ jobs:
 
 
       - name: Installing packages
-        uses: yarn Install
+        uses: yarn install
 
       - name: Building the app
         uses: yarn build
