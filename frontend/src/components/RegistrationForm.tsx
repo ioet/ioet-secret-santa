@@ -14,16 +14,15 @@ import {
   List,
   ListItem,
   ListItemText,
+  Checkbox,
 } from "@mui/material";
 import { useState } from 'react';
 
 interface Props {
   setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>,
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  open: boolean,
 }
 
-const RegistrationForm = ({ setIsRegistered, open, setOpen }: Props) => {
+const RegistrationForm = ({ setIsRegistered }: Props) => {
   const [selectedOffice, setSelectedOffice] = useState('');
   const [firstWish, setFirstWish] = useState('');
   const [secondWish, setSecondWish] = useState('');
@@ -34,12 +33,20 @@ const RegistrationForm = ({ setIsRegistered, open, setOpen }: Props) => {
   };
 
   const handleSubmit = async () => {
+    // validar que si checked === false enviar un string vacio
+    // si checked === true validar que los tres campos esten llenos
     setIsRegistered(true);
   }
 
-
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [checked, setChecked] = useState(true);
+
+  const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+  };
 
   return (
     <Box
@@ -61,7 +68,7 @@ const RegistrationForm = ({ setIsRegistered, open, setOpen }: Props) => {
           justifyContent="center"
         >
           <Typography variant="h2" component="h3" sx={{ mb: 3 }} >REGISTRATION FORM</Typography>
-          <Button onClick={handleOpen} sx={{ ml: 5, borderRadius: '50%', bgcolor: 'rgba(255,0,0,1)', color: '#fff', '&:hover': { bgcolor: 'rgba(255,128,128,1)' }, width: '70px', height: '70px' }}>Rules</Button>
+          <Button onClick={handleOpen} sx={{ ml: 5, mt: 1, bgcolor: 'rgba(255,0,0,1)', color: '#fff', '&:hover': { bgcolor: 'rgba(255,128,128,1)' }, height: '50px' }}>Rules</Button>
         </Box>
         <Modal
           open={open}
@@ -116,10 +123,16 @@ const RegistrationForm = ({ setIsRegistered, open, setOpen }: Props) => {
             <MenuItem value={'Loja'}>Loja</MenuItem>
           </Select>
         </FormControl>
-        <Typography variant="body1" component="div" sx={{ mb: 3 }} textAlign="left">Enter three things you would like to wish for Christmas:</Typography>
-        <TextField required fullWidth label="First wish" value={firstWish} onChange={(e) => setFirstWish(e.target.value)} sx={{ mb: 3 }} />
-        <TextField required fullWidth label="Second wish" value={secondWish} onChange={(e) => setSecondWish(e.target.value)} sx={{ mb: 3 }} />
-        <TextField required fullWidth label="Third wish" value={thirdWish} onChange={(e) => setThirdWish(e.target.value)} sx={{ mb: 3 }} />
+        <Typography variant="body1" component="div" sx={{ mb: 3 }} textAlign="left">I want to enter my christmas wishes. <Checkbox checked={checked} onChange={handleChangeCheckbox} inputProps={{ 'aria-label': 'controlled' }} /></Typography>
+        <>
+          {
+            checked && <>
+              <TextField required fullWidth label="First wish" value={firstWish} onChange={(e) => setFirstWish(e.target.value)} sx={{ mb: 3 }} />
+              <TextField required fullWidth label="Second wish" value={secondWish} onChange={(e) => setSecondWish(e.target.value)} sx={{ mb: 3 }} />
+              <TextField required fullWidth label="Third wish" value={thirdWish} onChange={(e) => setThirdWish(e.target.value)} sx={{ mb: 3 }} />
+            </>
+          }
+        </>
         <Button fullWidth sx={{ height: '50px', color: '#fff', bgcolor: 'rgba(255,0,0,1)', '&:hover': { bgcolor: 'rgba(255,128,128,1)' } }} onClick={handleSubmit}>Register</Button>
       </Box>
     </Box >
