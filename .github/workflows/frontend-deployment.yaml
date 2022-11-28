@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      VITE_AUTH_SERVICE_BACKEND_URL: ${{secrets.VITE_AUTH_SERVICE_BACKEND_URL}}
+      VITE_NAME: ${{secrets.VITE_NAME}}
+      VITE_REGISTER_DEADLINE: ${{secrets.VITE_REGISTER_DEADLINE}}
       WORKING_DIR: frontend
       AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
       AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
