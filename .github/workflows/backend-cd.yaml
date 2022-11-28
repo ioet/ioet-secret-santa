@@ -52,7 +52,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan -var-file=hydration.secrets.tfvars -no-color
+        run: terraform plan -no-color
         continue-on-error: true
         working-directory: ./${{ env.WORKING_DIR }}
 
@@ -83,5 +83,5 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -var-file=hydration.secrets.tfvars
+        run: terraform apply -auto-approve
         working-directory: ./${{ env.WORKING_DIR }}
