@@ -34,9 +34,12 @@ jobs:
 
       - name: Installing packages
         run: yarn install
+        working-directory: ./${{ env.WORKING_DIR }}
 
       - name: Building the app
         run: yarn build
+        working-directory: ./${{ env.WORKING_DIR }}
 
       - name: Uploading the app
         run: aws s3 cp build s3://ioet-secret-santa/ --recursive
+        working-directory: ./${{ env.WORKING_DIR }}
