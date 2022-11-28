@@ -8,7 +8,7 @@ terraform {
 
   backend "s3" {
     bucket  = "ioet-secret-santa-tfstate"
-    key     = "terraform/state/ioet-secret-santa.tfstate"
+    key     = "terraform/state/ioet-secret-santa-backend.tfstate"
     region  = "us-east-1"
     encrypt = true
   }
