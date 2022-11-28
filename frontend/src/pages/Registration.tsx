@@ -1,8 +1,9 @@
-import { Typography, Hidden, Button, Box } from "@mui/material";
+import { Typography, Hidden, Button, Box, Grid } from "@mui/material";
 import { useState } from "react";
 import Countdown from "react-countdown";
 import Image from ".././assets/christmas-gifts.webp"
 import RegistrationForm from "../components/RegistrationForm";
+import Renderer from ".././components/Renderer"
 
 interface Props {
   setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>,
@@ -102,7 +103,7 @@ const Registration = ({ setIsRegistered, countdown }: Props) => {
           >
             <Box component="img" src={Image} alt="Christmas gifts image" sx={{ maxWidth: '300px' }} />
             <br></br>
-            <Countdown date={countdown} />
+            <Countdown date={countdown} renderer={props => <Renderer days={props.days} hours={props.hours} minutes={props.minutes} seconds={props.seconds} completed={props.completed} setCanRegister={setCanRegister} />} />
             <br></br>
             <Hidden only={['md', 'lg', 'xl']}>
               <Button onClick={scrollWindow} sx={{ width: '250px', color: '#A30000', bgcolor: '#fff', '&:hover': { bgcolor: '#bbb' } }}>Register</Button>
