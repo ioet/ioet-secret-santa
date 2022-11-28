@@ -12,12 +12,14 @@ interface Props {
 
 const Registration = ({ setIsRegistered, countdown }: Props) => {
   const [canRegister, setCanRegister] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const scrollWindow = () => {
     window.scrollTo({
       top: document.documentElement.scrollHeight,
       behavior: 'smooth'
     })
+    setOpen(true);
   }
 
   return (
@@ -121,7 +123,7 @@ const Registration = ({ setIsRegistered, countdown }: Props) => {
           width='100%'
           height='100vh'
         >
-          <RegistrationForm setIsRegistered={setIsRegistered} />
+          <RegistrationForm setIsRegistered={setIsRegistered} open={open} setOpen={setOpen} />
         </Box>
       }
     </Box >

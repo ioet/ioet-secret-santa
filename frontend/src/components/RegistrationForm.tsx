@@ -18,10 +18,12 @@ import {
 import { useState } from 'react';
 
 interface Props {
-  setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>
+  setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>,
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  open: boolean,
 }
 
-const RegistrationForm = ({ setIsRegistered }: Props) => {
+const RegistrationForm = ({ setIsRegistered, open, setOpen }: Props) => {
   const [selectedOffice, setSelectedOffice] = useState('');
   const [firstWish, setFirstWish] = useState('');
   const [secondWish, setSecondWish] = useState('');
@@ -35,7 +37,7 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
     setIsRegistered(true);
   }
 
-  const [open, setOpen] = useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -76,7 +78,7 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
-              width: 400,
+              width: 500,
               bgcolor: 'white',
               boxShadow: 24,
               p: 4,
