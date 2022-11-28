@@ -1,4 +1,3 @@
-import { ImportContactsOutlined } from "@mui/icons-material";
 import {
   Box,
   Select,
@@ -9,6 +8,12 @@ import {
   TextField,
   Typography,
   Button,
+  Modal,
+  Backdrop,
+  Fade,
+  List,
+  ListItem,
+  ListItemText,
 } from "@mui/material";
 import { useState } from 'react';
 
@@ -30,6 +35,10 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
     setIsRegistered(true);
   }
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <Box
       width="100%"
@@ -44,7 +53,53 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
         }}
         textAlign="center"
       >
-        <Typography variant="h2" component="h3" sx={{ mb: 3 }} >REGISTRATION FORM</Typography>
+        <Box
+          display='flex'
+          width="100%"
+          justifyContent="center"
+        >
+          <Typography variant="h2" component="h3" sx={{ mb: 3 }} >REGISTRATION FORM</Typography>
+          <Button onClick={handleOpen} sx={{ ml: 5, borderRadius: '50%', bgcolor: 'rgba(255,0,0,1)', color: '#fff', '&:hover': { bgcolor: 'rgba(255,128,128,1)' }, width: '70px', height: '70px' }}>Rules</Button>
+        </Box>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={open}>
+            <Box sx={{
+              position: 'absolute' as 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: 400,
+              bgcolor: 'white',
+              boxShadow: 24,
+              p: 4,
+              borderRadius: '10px'
+            }}>
+              <Typography variant="h6" component="h2" textAlign='center'>
+                RULES
+              </Typography>
+              <List>
+                <ListItem>
+                  <ListItemText>
+                    The gift will have a minimum of $20 and a maximum of whatever your heart desires.
+                  </ListItemText>
+                </ListItem>
+                <ListItem>
+                  <ListItemText>
+                    The gift will be delivered to your Secret Santa on December 16th during Christmas dinner.
+                  </ListItemText>
+                </ListItem>
+              </List>
+            </Box>
+          </Fade>
+        </Modal>
         <FormControl fullWidth sx={{ mb: 3 }}>
           <InputLabel id="office-select-label">Select your office *</InputLabel>
           <Select

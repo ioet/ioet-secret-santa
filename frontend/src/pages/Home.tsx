@@ -28,7 +28,7 @@ const Home = ({ isRegistered, setIsRegistered }: Props) => {
           : <>
             {
               isRegistered
-                ? <SecretSanta countdown={gameDeadline} />
+                ? <SecretSanta countdown={registrationDeadline} />
                 : <Registration setIsRegistered={setIsRegistered} countdown={registrationDeadline} />
             }
           </>
