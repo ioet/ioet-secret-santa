@@ -1,5 +1,7 @@
 import { Button, Box, Grid } from '@mui/material';
 
+import { useState, useEffect } from 'react'
+import axios from "axios"
 import IOETLogo from '../assets/ioet.png';
 import BackgoundImage from '../assets/christmas_background.gif';
 import envManager from "../config/envManager";
@@ -9,8 +11,36 @@ interface Props {
 }
 
 const loginURL = `${envManager.AUTH_URL}authn/login/${envManager.APP_NAME}`;
+const backend = axios.create({
+  baseURL: envManager.BACKEND_URL,
+  withCredentials: true,
+});
 
 const Login = ({ setIsLogged }: Props) => {
+
+  useEffect(() => {
+    const getUserPermissions = async () => {
+      try {
+        const response = await backend.get("/api/authz/user-permissions");
+        return response?.status === 200 ? response?.data : null;
+      } catch (error) {
+        return null;
+      }
+    };
+
+    const fetchAndCheckUserPermissions = async () => {
+      const user = await getUserPermissions();
+      if (user != null) {
+        sessionStorage.setItem("user", JSON.stringify(user));
+        setIsLogged(true);
+      } else {
+        sessionStorage.clear();
+      }
+    };
+
+    fetchAndCheckUserPermissions();
+  }, []);
+
   return (
     <Grid
       container

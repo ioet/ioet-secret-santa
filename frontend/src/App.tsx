@@ -8,12 +8,8 @@ import Theme from './theme'
 
 function App() {
 
-  const [isLogged, setIsLogged] = useState(true);
-  const [isRegistered, setIsRegistered] = useState(true);
-
-  useEffect(() => {
-
-  }, []);
+  const [isLogged, setIsLogged] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
 
   return (
     <ThemeProvider theme={Theme}>

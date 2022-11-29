@@ -15,7 +15,7 @@ async def get_session(request: Request):
 async def auth_with_internal_service(
         request: Request,
         http_session: ClientSession = Depends(get_session)):
-    async with http_session.get(f'/authz/has-access/SecretSanta/{request.method.lower()}/{request.url.path.rstrip("/").lstrip("/")}') as response: 
+    async with http_session.get(f'/authz/has-access/{env_settings.appName}/{request.method.lower()}/{request.url.path.rstrip("/").lstrip("/")}') as response: 
 
         result = await response.json()
         if not result.get('has_access', False):
@@ -23,6 +23,6 @@ async def auth_with_internal_service(
 
 
 async def validate_user_session(http_session: ClientSession = Depends(get_session)):
-    async with http_session.get('/authz/user-permissions/SecretSanta') as response:
+    async with http_session.get(f'/authz/user-permissions/{env_settings.appName}') as response:
         if not response.status == 200:
             raise HTTPException(401, "Could not validate credentials")
