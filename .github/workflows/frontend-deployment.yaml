@@ -23,26 +23,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - uses: actions/cache@v3
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
       - name: Installing packages
-        run: yarn install
+        run: npm install
         working-directory: ./${{ env.WORKING_DIR }}
 
       - name: Building the app
-        run: yarn build
+        run: npm run build
         working-directory: ./${{ env.WORKING_DIR }}
 
       - name: Uploading the app
-        run: aws s3 sync . s3://ioet-secret-santa/ --recursive
+        run: aws s3 sync . s3://ioet-secret-santa/ --delete
         working-directory: ./${{ env.WORKING_DIR }}/dist
