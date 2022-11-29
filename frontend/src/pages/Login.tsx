@@ -34,9 +34,8 @@ const Login = ({ setIsLogged, setIsAdmin }: Props) => {
       if (user != null) {
         sessionStorage.setItem("user", JSON.stringify(user));
         setIsLogged(true);
-        console.log(user["roles"]["SecretSanta"])
         
-        user["roles"]["SecretSanta"].map((role: string) => {
+        user["roles"][envManager.APP_NAME].map((role: string) => {
           role==="admin" && setIsAdmin(true)
         })
       } else {

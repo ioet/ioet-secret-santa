@@ -12,7 +12,7 @@ function App() {
     <>
       {
         isLogged
-          ? <Home isRegistered={isRegistered} setIsRegistered={setIsRegistered} isAdmin = {isAdmin} setIsLogged = {setIsLogged} />
+          ? <Home isRegistered={isRegistered} setIsRegistered={setIsRegistered} isAdmin = {isAdmin} setIsLogged = {setIsLogged} setIsAdmin={setIsAdmin} />
           : <Login setIsLogged={setIsLogged} setIsAdmin = {setIsAdmin} />
       }
     </>

@@ -9,9 +9,10 @@ interface Props {
   setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>,
   isAdmin: boolean,
   setIsLogged: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-const Home = ({ isRegistered, setIsRegistered, isAdmin }: Props) => {
+const Home = ({ isRegistered, setIsRegistered, isAdmin, setIsAdmin, setIsLogged }: Props) => {
   const [registrationDeadline] = useState(envManager.REGISTRATION_DEADLINE);
   const [gameDeadline] = useState(envManager.GAME_DEADLINE);
 

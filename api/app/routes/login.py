@@ -1,7 +1,7 @@
 from fastapi import Depends, APIRouter, HTTPException
 from aiohttp import ClientSession
 
-from app.services.auth import get_session, auth_with_internal_service
+from app.services.auth import get_session
 from app.config import get_settings
 
 router = APIRouter()
