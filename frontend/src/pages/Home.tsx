@@ -19,7 +19,7 @@ const Home = ({ isRegistered, setIsRegistered, isAdmin }: Props) => {
     <>
       {
         isAdmin
-          ? <Admin />
+          ? <Admin setIsAdmin={setIsAdmin} />
           : <>
             {
               isRegistered
