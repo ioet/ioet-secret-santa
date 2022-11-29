@@ -44,5 +44,5 @@ jobs:
         working-directory: ./${{ env.WORKING_DIR }}
 
       - name: Uploading the app
-        run: aws s3 sync . s3://ioet-secret-santa/ --delete
+        run: aws s3 sync . s3://ioet-secret-santa/ --recursive
         working-directory: ./${{ env.WORKING_DIR }}/dist
