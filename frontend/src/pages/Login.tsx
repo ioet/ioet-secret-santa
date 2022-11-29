@@ -47,7 +47,7 @@ const Login = ({ setIsLogged }: Props) => {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      style={{ minHeight: '97vh' }}
+      style={{ minHeight: '100vh' }}
       sx={{ backgroundImage: `url(${BackgoundImage})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}
     >
       <Box
@@ -55,7 +55,7 @@ const Login = ({ setIsLogged }: Props) => {
         alt='ioet logo.'
         src={IOETLogo}
       />
-      <Button variant='contained' size="large" href={loginURL} >LOGIN</Button>
+      <Button sx={{ width: '200px', bgcolor: '#A30000', color: 'white', '&:hover': { bgcolor: '#F51300' } }} onClick={() => setIsLogged(true)}>LOGIN</Button>
     </Grid >
   )
 }

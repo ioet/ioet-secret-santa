@@ -1,11 +1,8 @@
-import { Typography, Grid, Button } from "@mui/material";
-import { useState } from 'react';
-import Countdown from 'react-countdown';
-import Appbar from "../components/Appbar";
-import RegistrationForm from "../components/RegistrationForm";
-import renderer from "../components/Renderer";
-import SecretSanta from "../components/SecretSanta";
+import { useEffect, useState } from 'react';
+import Registration from './Registration';
+import Admin from './Admin';
 import envManager from "../config/envManager";
+import SecretSanta from './SecretSanta';
 
 interface Props {
   isRegistered: boolean,
@@ -15,54 +12,27 @@ interface Props {
 const Home = ({ isRegistered, setIsRegistered }: Props) => {
   const [registrationDeadline] = useState(envManager.REGISTRATION_DEADLINE);
   const [gameDeadline] = useState(envManager.GAME_DEADLINE);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    // llamada al auth para conocer el rol
+
+    setIsAdmin(false);
+  }, []);
 
   return (
     <>
-      <Appbar />
-      <Grid
-        container
-        spacing={2}
-        width="100vw"
-        height="80vh"
-        alignItems="center"
-        justifyContent="center"
-        sx={{ marginTop: 10 }}
-      >
-        <Grid item width={{ sm: '100vw', md: '60vw' }}>
-          {
-            isRegistered
-              ? <SecretSanta />
-              : <RegistrationForm />
-          }
-        </Grid>
-        <Grid item width={{ sm: '100vw', md: '40vw' }}>
-          <Grid container width="100%" spacing={2}>
-            <Grid item width="100%">
-              {
-                isRegistered
-                  ? <Grid item width={{ sm: '100vw', md: '39vw' }} textAlign="center">
-                    <Typography variant="h6">DAYS UNTIL SECRET SANTA BEGIN</Typography>
-                    <Countdown date={gameDeadline} renderer={renderer} />
-                  </Grid>
-                  : <Grid item width={{ sm: '100vw', md: '39vw' }} textAlign="center">
-                    <Typography variant="h6">DAYS UNTIL REGISTRATION ENDS</Typography>
-                    <Countdown date={registrationDeadline} renderer={renderer} />
-                  </Grid>
-              }
-            </Grid>
-            <Grid item width="100%" >
-              <Grid
-                container
-                width="100%"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Button variant="contained" sx={{ ml: 1.5, width: "325px", height: "100px" }}>{isRegistered ? 'VIEW' : 'REGISTER'}</Button>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
+      {
+        isAdmin
+          ? <Admin />
+          : <>
+            {
+              isRegistered
+                ? <SecretSanta countdown={registrationDeadline} />
+                : <Registration setIsRegistered={setIsRegistered} countdown={registrationDeadline} />
+            }
+          </>
+      }
     </>
   );
 }
