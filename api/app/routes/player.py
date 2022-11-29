@@ -12,13 +12,25 @@ async def get_players() -> list:
     except Exception:
         raise HTTPException(status_code=500, detail=f'There are no players.')
 
-@router.get('/{region}')
+@router.get('/region/{region}')
 async def get_players_by_region(region: str) -> list:
     try:
         return get_data_by_attribute(document='players', attribute="region", value=region)
     except Exception:
         raise HTTPException(status_code=500, detail=f'There are no players.')
 
+@router.get('/get/{email}')
+async def is_player_registered(email: str) -> list:
+    
+    try:
+        player = get_data_by_attribute(document='players', attribute="email", value=email)
+        if not player:
+            return {'is_player_registered': False}
+
+        return {'is_player_registered': True, 'player': player[0]}
+
+    except Exception:
+        raise HTTPException(status_code=500, detail=f'Player not found')
 
 @router.post('/')
 async def create_player(req: Request) -> dict:
