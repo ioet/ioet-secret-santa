@@ -20,7 +20,7 @@ const Home = ({ isRegistered, setIsRegistered, isAdmin, setIsAdmin, setIsLogged 
     <>
       {
         isAdmin
-          ? <Admin setIsAdmin={setIsAdmin} />
+          ? <Admin setIsAdmin={setIsAdmin} setIsLogged={setIsLogged} />
           : <>
             {
               isRegistered

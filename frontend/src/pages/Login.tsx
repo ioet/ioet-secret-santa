@@ -11,7 +11,7 @@ interface Props {
   setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-const loginURL = `${envManager.AUTH_URL}authn/login/${envManager.APP_NAME}`;
+const loginURL = `${envManager.AUTH_URL}/authn/login/${envManager.APP_NAME}`;
 const backend = axios.create({
   baseURL: envManager.BACKEND_URL,
   withCredentials: true,
@@ -34,9 +34,9 @@ const Login = ({ setIsLogged, setIsAdmin }: Props) => {
       if (user != null) {
         sessionStorage.setItem("user", JSON.stringify(user));
         setIsLogged(true);
-        
+
         user["roles"][envManager.APP_NAME].map((role: string) => {
-          role==="admin" && setIsAdmin(true)
+          role === "admin" && setIsAdmin(true)
         })
       } else {
         sessionStorage.clear();

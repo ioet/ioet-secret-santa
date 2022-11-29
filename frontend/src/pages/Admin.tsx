@@ -15,10 +15,11 @@ import { useState } from "react"
 import Appbar from "../components/Appbar";
 
 interface Props {
-  setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>
+  setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-const Admin = ({ setIsAdmin }: Props) => {
+const Admin = ({ setIsAdmin, setIsLogged }: Props) => {
   const [selectedOffice, setSelectedOffice] = useState('');
   const [selectedPlayers, setSelectedPlayers] = useState([]);
 
@@ -73,7 +74,7 @@ const Admin = ({ setIsAdmin }: Props) => {
           width='100%'
           height='100%'
         >
-          <Appbar isAdmin={true} />
+          <Appbar isAdmin={true} setIsLogged={setIsLogged} />
           <Box
             sx={{ mt: '64px' }}
             display={{
