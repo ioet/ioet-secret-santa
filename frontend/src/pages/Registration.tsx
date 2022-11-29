@@ -110,7 +110,7 @@ const Registration = ({ setIsRegistered, countdown }: Props) => {
             <Countdown date={countdown} renderer={props => <Renderer days={props.days} hours={props.hours} minutes={props.minutes} seconds={props.seconds} completed={props.completed} setCanRegister={setCanRegister} />} />
             <br></br>
             <Hidden only={['md', 'lg', 'xl']}>
-              <Button onClick={scrollWindow} sx={{ width: '250px', color: '#A30000', bgcolor: '#fff', '&:hover': { bgcolor: '#bbb' } }}>Register</Button>
+              <Button onClick={scrollWindow} sx={{ width: '250px', color: '#A30000', bgcolor: '#fff', '&:hover': { bgcolor: '#bbb' }, opacity: `${canRegister ? '1' : '0'}` }}>Register</Button>
             </Hidden>
           </Box>
         </Box>
