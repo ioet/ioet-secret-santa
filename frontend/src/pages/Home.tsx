@@ -17,14 +17,14 @@ const Home = ({ isRegistered, setIsRegistered }: Props) => {
   useEffect(() => {
     // llamada al auth para conocer el rol
 
-    setIsAdmin(false);
+    setIsAdmin(true);
   }, []);
 
   return (
     <>
       {
         isAdmin
-          ? <Admin />
+          ? <Admin setIsAdmin={setIsAdmin} />
           : <>
             {
               isRegistered

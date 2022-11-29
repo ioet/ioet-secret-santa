@@ -5,7 +5,7 @@ import Home from './pages/Home';
 function App() {
 
   const [isLogged, setIsLogged] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(true);
 
   useEffect(() => {
     //validar login y registro desde auth

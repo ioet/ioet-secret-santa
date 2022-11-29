@@ -14,7 +14,11 @@ import {
 import { useState } from "react"
 import Appbar from "../components/Appbar";
 
-const Admin = () => {
+interface Props {
+  setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Admin = ({ setIsAdmin }: Props) => {
   const [selectedOffice, setSelectedOffice] = useState('');
   const [selectedPlayers, setSelectedPlayers] = useState([]);
 
@@ -41,6 +45,15 @@ const Admin = () => {
         }
       }
     }
+  }
+
+  const handleStart = () => {
+    // comenzar el juego
+    // llamada al backend
+  }
+
+  const handlePlay = () => {
+    setIsAdmin(false);
   }
 
   return (
@@ -144,12 +157,19 @@ const Admin = () => {
                       Admin Actions
                     </Typography>
                     <Divider />
+                    <Typography sx={{ mt: 2 }}>Go to the game</Typography>
+                    <Button
+                      fullWidth
+                      sx={{ bgcolor: '#A30000', color: '#fff', '&:hover': { bgcolor: 'rgba(255,128,128,1)' } }}
+                      onClick={handlePlay}
+                    >GAME</Button>
                     <Typography sx={{ mt: 2 }}>Press the following button to start the Secret Santa.</Typography>
                     <Button
                       fullWidth
                       sx={{ bgcolor: '#A30000', color: '#fff', '&:hover': { bgcolor: 'rgba(255,128,128,1)' } }}
+                      onClick={handleStart}
                     >START</Button>
-                    <Typography sx={{ mt: 2 }}> Press the following button to restart the game.</Typography>
+                    <Typography sx={{ mt: 2 }}>Press the following button to restart the game.</Typography>
                     <Button
                       fullWidth
                       sx={{ bgcolor: '#A30000', color: '#fff', '&:hover': { bgcolor: 'rgba(255,128,128,1)' } }}
