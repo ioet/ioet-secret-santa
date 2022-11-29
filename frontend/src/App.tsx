@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Login from './pages/Login';
 import Home from './pages/Home';
 
+
 function App() {
 
   const [isLogged, setIsLogged] = useState(false);
@@ -12,8 +13,8 @@ function App() {
     <>
       {
         isLogged
-          ? <Home isRegistered={isRegistered} setIsRegistered={setIsRegistered} isAdmin = {isAdmin} setIsLogged = {setIsLogged} setIsAdmin={setIsAdmin} />
-          : <Login setIsLogged={setIsLogged} setIsAdmin = {setIsAdmin} />
+          ? <Home isRegistered={isRegistered} setIsRegistered={setIsRegistered} isAdmin={isAdmin} setIsLogged={setIsLogged} setIsAdmin={setIsAdmin} />
+          : <Login setIsLogged={setIsLogged} setIsAdmin={setIsAdmin} />
       }
     </>
   )
