@@ -1,10 +1,11 @@
-from fastapi import APIRouter, HTTPException
+from app.services.auth import auth_with_internal_service
+from fastapi import APIRouter, HTTPException, Depends
 from app.services import calculate_secret_santa_results, get_data_by_attribute, save_register
 
 router = APIRouter()
 
 @router.post("/{region}")
-async def calculate_results(region: str) -> dict:
+async def calculate_results(region: str,  _=Depends(auth_with_internal_service)) -> dict:
     try:
         players = get_data_by_attribute(document='players', attribute="region", value=region)
         results = calculate_secret_santa_results(players)

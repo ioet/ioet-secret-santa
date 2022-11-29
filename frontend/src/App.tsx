@@ -6,17 +6,14 @@ function App() {
 
   const [isLogged, setIsLogged] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
-
-  useEffect(() => {
-    //validar login y registro desde auth
-  }, []);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   return (
     <>
       {
         isLogged
-          ? <Home isRegistered={isRegistered} setIsRegistered={setIsRegistered} />
-          : <Login setIsLogged={setIsLogged} />
+          ? <Home isRegistered={isRegistered} setIsRegistered={setIsRegistered} isAdmin = {isAdmin} setIsLogged = {setIsLogged} setIsAdmin={setIsAdmin} />
+          : <Login setIsLogged={setIsLogged} setIsAdmin = {setIsAdmin} />
       }
     </>
   )

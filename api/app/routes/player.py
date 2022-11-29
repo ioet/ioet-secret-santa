@@ -1,4 +1,5 @@
-from fastapi import APIRouter, HTTPException, Request
+from app.services.auth import auth_with_internal_service
+from fastapi import APIRouter, Depends, HTTPException, Request
 from datetime import datetime
 from app.services import get_data, get_data_by_attribute, save_register
 
@@ -6,21 +7,21 @@ router = APIRouter()
 
 
 @router.get('/')
-async def get_players() -> list:
+async def get_players(_=Depends(auth_with_internal_service)) -> list:
     try:
         return get_data(document='players')
     except Exception:
         raise HTTPException(status_code=500, detail=f'There are no players.')
 
 @router.get('/region/{region}')
-async def get_players_by_region(region: str) -> list:
+async def get_players_by_region(region: str, _=Depends(auth_with_internal_service)) -> list:
     try:
         return get_data_by_attribute(document='players', attribute="region", value=region)
     except Exception:
         raise HTTPException(status_code=500, detail=f'There are no players.')
 
 @router.get('/get/{email}')
-async def is_player_registered(email: str) -> list:
+async def is_player_registered(email: str, _=Depends(auth_with_internal_service)) -> list:
     
     try:
         player = get_data_by_attribute(document='players', attribute="email", value=email)
@@ -33,7 +34,7 @@ async def is_player_registered(email: str) -> list:
         raise HTTPException(status_code=500, detail=f'Player not found')
 
 @router.post('/')
-async def create_player(req: Request) -> dict:
+async def create_player(req: Request, _=Depends(auth_with_internal_service)) -> dict:
     try:
         body = await req.json()
         registry = {
@@ -44,6 +45,7 @@ async def create_player(req: Request) -> dict:
             'key': body.get("email").split('@')[0].replace('.', '_').lower(),
             'timestamp': str(datetime.now())
         }
+
         save_register(document='players', registry=registry, key="key")
         return {'detail': "Successfully created"}
     except Exception as e:

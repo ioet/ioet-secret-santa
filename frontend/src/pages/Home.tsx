@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Registration from './Registration';
 import Admin from './Admin';
 import envManager from "../config/envManager";
@@ -6,19 +6,15 @@ import SecretSanta from './SecretSanta';
 
 interface Props {
   isRegistered: boolean,
-  setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>
+  setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>,
+  isAdmin: boolean,
+  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-const Home = ({ isRegistered, setIsRegistered }: Props) => {
+const Home = ({ isRegistered, setIsRegistered, isAdmin, setIsAdmin, setIsLogged }: Props) => {
   const [registrationDeadline] = useState(envManager.REGISTRATION_DEADLINE);
   const [gameDeadline] = useState(envManager.GAME_DEADLINE);
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    // llamada al auth para conocer el rol
-
-    setIsAdmin(false);
-  }, []);
 
   return (
     <>
@@ -28,7 +24,7 @@ const Home = ({ isRegistered, setIsRegistered }: Props) => {
           : <>
             {
               isRegistered
-                ? <SecretSanta countdown={registrationDeadline} />
+                ? <SecretSanta countdown={registrationDeadline} setIsLogged={setIsLogged} />
                 : <Registration setIsRegistered={setIsRegistered} countdown={registrationDeadline} />
             }
           </>

@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     messagingSenderId: str
     appId: str
     measurementId: str
+    appName: str
 
     class Config:
         env_file = './.env'

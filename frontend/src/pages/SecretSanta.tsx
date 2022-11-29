@@ -5,7 +5,8 @@ import Appbar from "../components/Appbar";
 import '../styles/Renderer.css'
 
 interface Props {
-  countdown: any
+  countdown: any,
+  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 interface CountdownProps {
@@ -132,7 +133,7 @@ function Renderer({ days, hours, minutes, seconds, completed }: CountdownProps) 
   )
 };
 
-const SecretSanta = ({ countdown }: Props) => {
+const SecretSanta = ({ countdown, setIsLogged }: Props) => {
   return (
     <Box display='block' width='100vw'>
       <Box
@@ -151,7 +152,7 @@ const SecretSanta = ({ countdown }: Props) => {
           width='100%'
           height='100%'
         >
-          <Appbar />
+          <Appbar setIsLogged={setIsLogged}/>
           <Box sx={{ textAlign: 'center', }}>
             <Box sx={{ p: 5 }}>
               <Typography
