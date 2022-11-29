@@ -82,50 +82,50 @@ function Renderer({ days, hours, minutes, seconds, completed }: CountdownProps) 
           >
             <div className="date-group">
               <div style={{ 'display': 'flex' }}>
-                <Grid item width='75px' height='100px' border={1} textAlign="center" sx={{ mr: 1, backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
-                  <Typography variant="h3" sx={{ pt: 3 }}>{getFirstNumber(days)}</Typography>
+                <Grid item width={{ xs: '50px', sm: '50px', md: '100px' }} height={{ xs: '75px', sm: '75px', md: '125px' }} border={1} textAlign="center" sx={{ mr: 1, backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
+                  <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ pt: { xs: 2.5, sm: 2.5, md: 4 } }}>{getFirstNumber(days)}</Typography>
                 </Grid>
-                <Grid item width='75px' height='100px' border={1} textAlign="center" sx={{ backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
-                  <Typography variant="h3" sx={{ pt: 3 }}>{getSecondNumber(days)}</Typography>
+                <Grid item width={{ xs: '50px', sm: '50px', md: '100px' }} height={{ xs: '75px', sm: '75px', md: '125px' }} border={1} textAlign="center" sx={{ backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
+                  <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ pt: { xs: 2.5, sm: 2.5, md: 4 } }}>{getSecondNumber(days)}</Typography>
                 </Grid>
               </div>
-              <Typography variant="h6" sx={{ pt: 3, color: '#fff' }}>DAYS</Typography>
+              <Typography variant="h6" sx={{ pt: 1, color: '#fff' }}>DAYS</Typography>
             </div>
-            <Typography variant="h3" sx={{ color: '#fff', mr: 1, mb: 7, ml: 1 }} align='center'>:</Typography>
+            <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ color: '#fff', mr: 1, mb: 7, ml: 1 }} align='center'>:</Typography>
             <div className="date-group">
               <div style={{ 'display': 'flex' }}>
-                <Grid item width='75px' height='100px' border={1} textAlign="center" sx={{ mr: 1, backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
-                  <Typography variant="h3" sx={{ pt: 3 }}>{getFirstNumber(hours)}</Typography>
+                <Grid item width={{ xs: '50px', sm: '50px', md: '100px' }} height={{ xs: '75px', sm: '75px', md: '125px' }} border={1} textAlign="center" sx={{ mr: 1, backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
+                  <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ pt: { xs: 2.5, sm: 2.5, md: 4 } }}>{getFirstNumber(hours)}</Typography>
                 </Grid>
-                <Grid item width='75px' height='100px' border={1} textAlign="center" sx={{ backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
-                  <Typography variant="h3" sx={{ pt: 3 }}>{getSecondNumber(hours)}</Typography>
+                <Grid item width={{ xs: '50px', sm: '50px', md: '100px' }} height={{ xs: '75px', sm: '75px', md: '125px' }} border={1} textAlign="center" sx={{ backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
+                  <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ pt: { xs: 2.5, sm: 2.5, md: 4 } }}>{getSecondNumber(hours)}</Typography>
                 </Grid>
               </div>
-              <Typography variant="h6" sx={{ pt: 3, color: '#fff' }}>HOURS</Typography>
+              <Typography variant="h6" sx={{ pt: 1, color: '#fff' }}>HOURS</Typography>
             </div>
-            <Typography variant="h3" sx={{ color: '#fff', mr: 1, mb: 7, ml: 1 }}>:</Typography>
+            <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ color: '#fff', mr: 1, mb: 7, ml: 1 }}>:</Typography>
             <div className="date-group">
               <div style={{ 'display': 'flex' }}>
-                <Grid item width='75px' height='100px' border={1} textAlign="center" sx={{ mr: 1, backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
-                  <Typography variant="h3" sx={{ pt: 3 }}>{getFirstNumber(minutes)}</Typography>
+                <Grid item width={{ xs: '50px', sm: '50px', md: '100px' }} height={{ xs: '75px', sm: '75px', md: '125px' }} border={1} textAlign="center" sx={{ mr: 1, backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
+                  <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ pt: { xs: 2.5, sm: 2.5, md: 4 } }}>{getFirstNumber(minutes)}</Typography>
                 </Grid>
-                <Grid item width='75px' height='100px' border={1} textAlign="center" sx={{ backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
-                  <Typography variant="h3" sx={{ pt: 3 }}>{getSecondNumber(minutes)}</Typography>
+                <Grid item width={{ xs: '50px', sm: '50px', md: '100px' }} height={{ xs: '75px', sm: '75px', md: '125px' }} border={1} textAlign="center" sx={{ backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
+                  <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ pt: { xs: 2.5, sm: 2.5, md: 4 } }}>{getSecondNumber(minutes)}</Typography>
                 </Grid>
               </div>
-              <Typography variant="h6" sx={{ pt: 3, color: '#fff' }}>MINUTES</Typography>
+              <Typography variant="h6" sx={{ pt: 1, color: '#fff' }}>MINUTES</Typography>
             </div>
-            <Typography variant="h3" sx={{ color: '#fff', mr: 1, mb: 7, ml: 1 }}>:</Typography>
+            <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ color: '#fff', mr: 1, mb: 7, ml: 1 }}>:</Typography>
             <div className="date-group">
               <div style={{ 'display': 'flex' }}>
-                <Grid item width='75px' height='100px' border={1} textAlign="center" sx={{ mr: 1, backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
-                  <Typography variant="h3" sx={{ pt: 3 }}>{getFirstNumber(seconds)}</Typography>
+                <Grid item width={{ xs: '50px', sm: '50px', md: '100px' }} height={{ xs: '75px', sm: '75px', md: '125px' }} border={1} textAlign="center" sx={{ mr: 1, backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
+                  <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ pt: { xs: 2.5, sm: 2.5, md: 4 } }}>{getFirstNumber(seconds)}</Typography>
                 </Grid>
-                <Grid item width='75px' height='100px' border={1} textAlign="center" sx={{ mr: 1, backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
-                  <Typography variant="h3" sx={{ pt: 3 }}>{getSecondNumber(seconds)}</Typography>
+                <Grid item width={{ xs: '50px', sm: '50px', md: '100px' }} height={{ xs: '75px', sm: '75px', md: '125px' }} border={1} textAlign="center" sx={{ mr: 1, backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
+                  <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ pt: { xs: 2.5, sm: 2.5, md: 4 } }}>{getSecondNumber(seconds)}</Typography>
                 </Grid>
               </div>
-              <Typography variant="h6" sx={{ pt: 3, color: '#fff' }}>SECONDS</Typography>
+              <Typography variant="h6" sx={{ pt: 1, color: '#fff' }}>SECONDS</Typography>
             </div>
           </Grid>
       }
