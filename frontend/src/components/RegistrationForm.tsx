@@ -69,9 +69,10 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
             md: 'flex',
           }}
           justifyContent="center"
+          textAlign="center"
         >
-          <Typography fontSize={{ xs: 20, sm: 20, md: 40 }} sx={{ mb: 3, wordWrap: "break-word" }} >REGISTRATION FORM</Typography>
-          <Button onClick={handleOpen} sx={{ ml: 5, mt: 1, bgcolor: 'rgba(255,0,0,1)', color: '#fff', '&:hover': { bgcolor: 'rgba(255,128,128,1)' }, height: '50px', mb: 5 }}>Rules</Button>
+          <Typography fontSize={{ xs: 30, sm: 30, md: 40 }} sx={{ mb: 3, wordWrap: "break-word" }} >REGISTRATION FORM</Typography>
+          <Button onClick={handleOpen} sx={{ ml: { xs: 0, sm: 0, md: 5 }, bgcolor: 'rgba(255,0,0,1)', color: '#fff', '&:hover': { bgcolor: 'rgba(255,128,128,1)' }, height: '50px', mb: 5 }}>Rules</Button>
         </Box>
         <Modal
           open={open}
@@ -83,17 +84,23 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
           }}
         >
           <Fade in={open}>
-            <Box sx={{
-              position: 'absolute' as 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: 500,
-              bgcolor: 'white',
-              boxShadow: 24,
-              p: 4,
-              borderRadius: '10px'
-            }}>
+            <Box
+              sx={{
+                position: 'absolute' as 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                bgcolor: 'white',
+                boxShadow: 24,
+                p: 4,
+                borderRadius: '10px'
+              }}
+              width={{
+                xs: 250,
+                sm: 250,
+                md: 500,
+              }}
+            >
               <Typography variant="h6" component="h2" textAlign='center'>
                 RULES
               </Typography>
@@ -106,6 +113,11 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
                 <ListItem>
                   <ListItemText>
                     The gift will be delivered to your Secret Santa on December 16th during Christmas dinner.
+                  </ListItemText>
+                </ListItem>
+                <ListItem>
+                  <ListItemText>
+                    You can enter three wishes in the application to make it easy for your Secret Santa or you can uncheck the box to be surprised with a gift.
                   </ListItemText>
                 </ListItem>
               </List>
@@ -126,7 +138,7 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
             <MenuItem value={'Loja'}>Loja</MenuItem>
           </Select>
         </FormControl>
-        <Typography variant="body1" component="div" sx={{ mb: 3 }} textAlign="left">I want to enter my christmas wishes. <Checkbox checked={checked} onChange={handleChangeCheckbox} inputProps={{ 'aria-label': 'controlled' }} /></Typography>
+        <Typography variant="body1" component="div" sx={{ mb: 3 }} textAlign="left">{checked ? 'I want to enter my christmas wishes' : 'Surprise me!'}<Checkbox sx={{ color: '#A30000', '&.Mui-checked': { color: '#A30000' }, }} checked={checked} onChange={handleChangeCheckbox} inputProps={{ 'aria-label': 'controlled' }} /></Typography>
         <>
           {
             checked && <>

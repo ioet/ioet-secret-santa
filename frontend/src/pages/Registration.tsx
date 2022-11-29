@@ -40,8 +40,8 @@ const Registration = ({ setIsRegistered, countdown }: Props) => {
             md: '50%'
           }}
           height={{
-            xs: '30vh',
-            sm: '30vh',
+            xs: '20vh',
+            sm: '20vh',
             md: '100vh',
           }}
         >
@@ -89,8 +89,8 @@ const Registration = ({ setIsRegistered, countdown }: Props) => {
             md: '50%'
           }}
           height={{
-            xs: '70vh',
-            sm: '70vh',
+            xs: '80vh',
+            sm: '80vh',
             md: '100vh',
           }}
         >
