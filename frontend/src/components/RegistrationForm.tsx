@@ -71,7 +71,7 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
           justifyContent="center"
         >
           <Typography fontSize={{ xs: 20, sm: 20, md: 40 }} sx={{ mb: 3, wordWrap: "break-word" }} >REGISTRATION FORM</Typography>
-          <Button onClick={handleOpen} sx={{ ml: 5, mt: 1, bgcolor: 'rgba(255,0,0,1)', color: '#fff', '&:hover': { bgcolor: 'rgba(255,128,128,1)' }, height: '50px' }}>Rules</Button>
+          <Button onClick={handleOpen} sx={{ ml: 5, mt: 1, bgcolor: 'rgba(255,0,0,1)', color: '#fff', '&:hover': { bgcolor: 'rgba(255,128,128,1)' }, height: '50px', mb: 5 }}>Rules</Button>
         </Box>
         <Modal
           open={open}
