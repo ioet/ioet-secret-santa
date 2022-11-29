@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request
 from datetime import datetime
 from app.services import get_data, get_data_by_attribute, save_register
 
@@ -6,7 +6,7 @@ router = APIRouter()
 
 
 @router.get('/')
-async def get_players() -> list:
+async def get_players(_=Depends(auth_with_internal_service)) -> list:
     try:
         return get_data(document='players')
     except Exception:
@@ -33,7 +33,7 @@ async def is_player_registered(email: str) -> list:
         raise HTTPException(status_code=500, detail=f'Player not found')
 
 @router.post('/')
-async def create_player(req: Request) -> dict:
+async def create_player(req: Request, _=Depends(auth_with_internal_service)) -> dict:
     try:
         body = await req.json()
         registry = {
