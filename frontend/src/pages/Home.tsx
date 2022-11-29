@@ -8,6 +8,7 @@ interface Props {
   isRegistered: boolean,
   setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>,
   isAdmin: boolean,
+  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const Home = ({ isRegistered, setIsRegistered, isAdmin }: Props) => {
@@ -22,7 +23,7 @@ const Home = ({ isRegistered, setIsRegistered, isAdmin }: Props) => {
           : <>
             {
               isRegistered
-                ? <SecretSanta countdown={registrationDeadline} />
+                ? <SecretSanta countdown={registrationDeadline} setIsLogged={setIsLogged} />
                 : <Registration setIsRegistered={setIsRegistered} countdown={registrationDeadline} />
             }
           </>
