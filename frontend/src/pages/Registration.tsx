@@ -33,15 +33,19 @@ const Registration = ({ setIsRegistered, countdown }: Props) => {
         <Box
           sx={{
             display: 'flex',
-            alignItems: 'center',
+          }}
+          alignItems={{
+            xs: 'flex-start',
+            sm: 'flex-start',
+            md: 'center',
           }}
           width={{
             sm: '100%',
             md: '50%'
           }}
           height={{
-            xs: '20vh',
-            sm: '20vh',
+            xs: '25vh',
+            sm: '25vh',
             md: '100vh',
           }}
         >
@@ -89,8 +93,8 @@ const Registration = ({ setIsRegistered, countdown }: Props) => {
             md: '50%'
           }}
           height={{
-            xs: '80vh',
-            sm: '80vh',
+            xs: '75vh',
+            sm: '75vh',
             md: '100vh',
           }}
         >
