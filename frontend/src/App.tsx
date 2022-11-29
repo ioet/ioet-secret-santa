@@ -6,13 +6,14 @@ function App() {
 
   const [isLogged, setIsLogged] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   return (
     <>
       {
         isLogged
-          ? <Home isRegistered={isRegistered} setIsRegistered={setIsRegistered} />
-          : <Login setIsLogged={setIsLogged} />
+          ? <Home isRegistered={isRegistered} setIsRegistered={setIsRegistered} isAdmin = {isAdmin} />
+          : <Login setIsLogged={setIsLogged} setIsAdmin = {setIsAdmin} />
       }
     </>
   )

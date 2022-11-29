@@ -7,7 +7,8 @@ import BackgoundImage from '../assets/christmas_background.gif';
 import envManager from "../config/envManager";
 
 interface Props {
-  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>
+  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const loginURL = `${envManager.AUTH_URL}authn/login/${envManager.APP_NAME}`;
@@ -16,7 +17,7 @@ const backend = axios.create({
   withCredentials: true,
 });
 
-const Login = ({ setIsLogged }: Props) => {
+const Login = ({ setIsLogged, setIsAdmin }: Props) => {
 
   useEffect(() => {
     const getUserPermissions = async () => {
@@ -33,6 +34,11 @@ const Login = ({ setIsLogged }: Props) => {
       if (user != null) {
         sessionStorage.setItem("user", JSON.stringify(user));
         setIsLogged(true);
+        console.log(user["roles"]["SecretSanta"])
+        
+        user["roles"]["SecretSanta"].map((role: string) => {
+          role==="admin" && setIsAdmin(true)
+        })
       } else {
         sessionStorage.clear();
       }
@@ -55,7 +61,7 @@ const Login = ({ setIsLogged }: Props) => {
         alt='ioet logo.'
         src={IOETLogo}
       />
-      <Button sx={{ width: '200px', bgcolor: '#A30000', color: 'white', '&:hover': { bgcolor: '#F51300' } }} onClick={() => setIsLogged(true)}>LOGIN</Button>
+      <Button href={loginURL} sx={{ width: '200px', bgcolor: '#A30000', color: 'white', '&:hover': { bgcolor: '#F51300' } }}>LOGIN</Button>
     </Grid >
   )
 }
