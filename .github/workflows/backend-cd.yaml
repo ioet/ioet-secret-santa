@@ -32,6 +32,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: "us-east-1"
 
+      # Install SOPS
+      - name: Sops Binary Installer
+        uses: mdgreenwald/mozilla-sops-action@v1
+
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1

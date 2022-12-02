@@ -68,12 +68,30 @@ POLICY
   }
 }
 
+data "external" "sops_secrets_variable" {
+  program = ["sops", "-d", "../../secret-santa-credentials.json"]
+}
+
 resource "aws_lambda_function" "secret-santa_lambda" {
   function_name = var.function_name
   role          = aws_iam_role.iam_for_lambda.arn
   timeout       = 15
   image_uri     = var.secret_santa_image
   package_type  = "Image"
+  environment {
+    variables = {
+      "apiKey" = sensitive(data.external.sops_secrets_variable.result["apiKey"]),
+      "authDomain" = sensitive(data.external.sops_secrets_variable.result["authDomain"]),
+      "databaseURL" = sensitive(data.external.sops_secrets_variable.result["databaseURL"]),
+      "projectId" = sensitive(data.external.sops_secrets_variable.result["projectId"]),
+      "storageBucket" = sensitive(data.external.sops_secrets_variable.result["storageBucket"]),
+      "messagingSenderId" = sensitive(data.external.sops_secrets_variable.result["messagingSenderId"]),
+      "appId" = sensitive(data.external.sops_secrets_variable.result["appId"]),
+      "measurementId" = sensitive(data.external.sops_secrets_variable.result["measurementId"]),
+      "appName" = sensitive(data.external.sops_secrets_variable.result["appName"]),
+      "authBackendURL" = sensitive(data.external.sops_secrets_variable.result["authBackendURL"])
+    }
+  }
 }
 
 resource "aws_lambda_permission" "lambda_permision" {
@@ -178,4 +196,8 @@ resource "aws_api_gateway_domain_name" "secret-santa_domain" {
   depends_on      = [aws_acm_certificate_validation.acm_cert_validation]
   domain_name     = aws_acm_certificate.secret-santa_cert.domain_name
   certificate_arn = aws_acm_certificate_validation.acm_cert_validation.certificate_arn
+}
+
+module "kms_key" {
+  source = "./lib/kms"
 }
