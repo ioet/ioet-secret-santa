@@ -42,6 +42,7 @@ async def create_player(req: Request, _=Depends(auth_with_internal_service)) -> 
             'wishes': body.get("wishes"),
             'name': body.get("name"),
             'email': body.get("email"),
+            'picture': body.get("picture"),
             'key': body.get("email").split('@')[0].replace('.', '_').lower(),
             'timestamp': str(datetime.now())
         }
