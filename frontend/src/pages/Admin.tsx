@@ -9,10 +9,20 @@ import {
   MenuItem,
   SelectChangeEvent,
   Button,
-  Divider
+  Divider,
+  getBottomNavigationUtilityClass
 } from "@mui/material";
 import { useState } from "react"
 import Appbar from "../components/Appbar";
+import envManager from "../config/envManager";
+import axios from 'axios';
+import { isNullOrUndefined } from "util";
+
+
+const backend = axios.create({
+  baseURL: envManager.BACKEND_URL,
+  withCredentials: true,
+});
 
 interface Props {
   setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>,
@@ -23,12 +33,21 @@ const Admin = ({ setIsAdmin, setIsLogged }: Props) => {
   const [selectedOffice, setSelectedOffice] = useState('');
   const [selectedPlayers, setSelectedPlayers] = useState([]);
 
+  const fetchOffices = async () => {
+    const response = await backend.get(`/results/region/${selectedOffice}`);
+    return response.status === 200 ? response.data : null;
+  }
+
   const handleChange = (event: SelectChangeEvent) => {
     setSelectedOffice(event.target.value as string);
 
-    // llamar al backend para conseguir los resultados por oficina
-    setSelectedPlayers([]);
+    const requestOfficeData = async () => {
+      const officeData = await fetchOffices();
+      officeData && setSelectedPlayers(officeData)
+    }
+    requestOfficeData();
   };
+
 
   const handleRestart = () => {
     const firstResponse = confirm('Are you sure you want to restart the game?\nThis will erase all log data and game operations.');
@@ -48,9 +67,15 @@ const Admin = ({ setIsAdmin, setIsLogged }: Props) => {
     }
   }
 
+  const startGameByOffice = async (office: string) => {
+    const response = await backend.get(`/secret-santa/${office}`);
+    return response.status === 200;
+  }
+
   const handleStart = () => {
-    // comenzar el juego
-    // llamada al backend
+    ['quito', 'guayaquil', 'loja'].map(office => {
+      startGameByOffice(office);
+    })
   }
 
   const handlePlay = () => {
