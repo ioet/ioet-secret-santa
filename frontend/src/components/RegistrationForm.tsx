@@ -17,6 +17,14 @@ import {
   Checkbox,
 } from "@mui/material";
 import { useState } from 'react';
+import envManager from "../config/envManager";
+import axios from 'axios';
+
+
+const backend = axios.create({
+  baseURL: envManager.BACKEND_URL,
+  withCredentials: true,
+});
 
 interface Props {
   setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>,
@@ -27,26 +35,45 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
   const [firstWish, setFirstWish] = useState('');
   const [secondWish, setSecondWish] = useState('');
   const [thirdWish, setThirdWish] = useState('');
+  const [checked, setChecked] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const handleChange = (event: SelectChangeEvent) => {
     setSelectedOffice(event.target.value as string);
   };
 
-  const handleSubmit = async () => {
-    // validar que si checked === false enviar un string vacio
-    // si checked === true validar que los tres campos esten llenos
-    setIsRegistered(true);
-  }
-
-  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const [checked, setChecked] = useState(true);
 
   const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
   };
+
+  const validateFields = () => {
+    return selectedOffice !== '' && (!checked || (firstWish !== '' && secondWish !== '' && thirdWish !== ''));
+  }
+
+  const handleSubmit = async () => {
+    if (validateFields()) {
+      const sessionStorageData = sessionStorage.getItem('user');
+      const jsonData = sessionStorageData && JSON.parse(sessionStorageData);
+
+      let body = {
+        'region': selectedOffice,
+        'wishes': checked ? [firstWish, secondWish, thirdWish] : '',
+        'name': jsonData['name'],
+        'email': jsonData['email'],
+        'picture': jsonData['picture'],
+      }
+
+      const response = await backend.post('/player', body);
+      response.status === 200 && setIsRegistered(true);
+      console.log(response);
+    }
+    else {
+      alert('Fill all the required fields, please!');
+    }
+  }
 
   return (
     <Box
