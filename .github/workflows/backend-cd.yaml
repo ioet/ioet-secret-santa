@@ -19,32 +19,10 @@ jobs:
       WORKING_DIR: infrastructure/backend
       AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
       AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-      IMAGE_TAG: ${{ github.sha }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: "us-east-1"
-
-      # - name: Login to Amazon ECR
-      #   id: login-ecr
-      #   uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Build, tag, and push Secret santa image to Amazon ECR
-        env:
-          ECR_REGISTRY_STEP: ${{ steps.login-ecr.outputs.registry }}
-        run: |
-          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 058565519576.dkr.ecr.us-east-1.amazonaws.com
-          docker build -t secret-santa-repository .
-          docker tag secret-santa-repository:latest 058565519576.dkr.ecr.us-east-1.amazonaws.com/secret-santa-repository:latest
-          docker push 058565519576.dkr.ecr.us-east-1.amazonaws.com/secret-santa-repository:latest
-        working-directory: ./api         
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
