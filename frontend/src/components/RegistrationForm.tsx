@@ -165,10 +165,10 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
             <MenuItem value={'Loja'}>Loja</MenuItem>
           </Select>
         </FormControl>
-        <Typography variant="body1" component="div" sx={{ mb: 3 }} textAlign="left">{checked ? 'I want to enter my christmas wishes' : 'Surprise me!'}<Checkbox sx={{ color: '#A30000', '&.Mui-checked': { color: '#A30000' }, }} checked={checked} onChange={handleChangeCheckbox} inputProps={{ 'aria-label': 'controlled' }} /></Typography>
+        <Typography variant="body1" component="div" sx={{ mb: 3 }} textAlign="left">{!checked ? 'I want to enter my christmas wishes' : 'Surprise me!'}<Checkbox sx={{ color: '#A30000', '&.Mui-checked': { color: '#A30000' }, }} checked={checked} onChange={handleChangeCheckbox} inputProps={{ 'aria-label': 'controlled' }} /></Typography>
         <>
           {
-            checked && <>
+            !checked && <>
               <TextField required fullWidth label="First wish" value={firstWish} onChange={(e) => setFirstWish(e.target.value)} sx={{ mb: 3 }} />
               <TextField required fullWidth label="Second wish" value={secondWish} onChange={(e) => setSecondWish(e.target.value)} sx={{ mb: 3 }} />
               <TextField required fullWidth label="Third wish" value={thirdWish} onChange={(e) => setThirdWish(e.target.value)} sx={{ mb: 3 }} />
