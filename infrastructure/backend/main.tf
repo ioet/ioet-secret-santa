@@ -139,6 +139,7 @@ resource "aws_api_gateway_resource" "lambda_api_gateway" {
   path_part   = "{proxy+}"
 }
 
+
 resource "aws_api_gateway_rest_api" "secret-santa-back-rest-api" {
   name = "secret-santa-backend-${var.enviroment}"
 }

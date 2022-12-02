@@ -36,7 +36,7 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build, tag, and push Perfomance image to Amazon ECR
+      - name: Build, tag, and push secret Secret Santa to Amazon ECR
         env:
           ECR_REGISTRY_STEP: ${{ steps.login-ecr.outputs.registry }}
         run: |
@@ -55,11 +55,6 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.INFRA_TERRAFORM_MODULES_SSH_PRIV_KEY }}
 
-      - name: Terraform Format
-        id: fmt
-        run: terraform fmt -check
-        working-directory: ./${{ env.WORKING_DIR }}
-
       - name: Terraform Init
         id: init
         run: terraform init
@@ -73,7 +68,9 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan -no-color
+        env:
+          TF_VAR_SECRET_SANTA_IMAGE: ${{ format('{0}/secret-santa-repository:{1}', steps.login-ecr.outputs.registry, github.sha) }}
+        run: terraform plan -no-color -var secret_santa_image=${{env.TF_VAR_SECRET_SANTA_IMAGE}}
         continue-on-error: true
         working-directory: ./${{ env.WORKING_DIR }}
 
@@ -110,5 +107,7 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve
+        env:
+          TF_VAR_SECRET_SANTA_IMAGE: ${{ format('{0}/secret-santa-repository:{1}', steps.login-ecr.outputs.registry, github.sha) }}
+        run: terraform apply -auto-approve -var secret_santa_image=${{env.TF_VAR_SECRET_SANTA_IMAGE}}
         working-directory: ./${{ env.WORKING_DIR }}
