@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     appId: str
     measurementId: str
     appName: str
+    authBackendURL: str
 
     class Config:
         env_file = './.env'
