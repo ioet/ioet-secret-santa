@@ -11,7 +11,7 @@ import {
   Button,
   Divider,
 } from "@mui/material";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Appbar from "../components/Appbar";
 import envManager from "../config/envManager";
 import axios from 'axios';
@@ -38,13 +38,15 @@ const Admin = ({ setIsAdmin, setIsLogged }: Props) => {
 
   const handleChange = (event: SelectChangeEvent) => {
     setSelectedOffice(event.target.value as string);
+  };
 
+  useEffect(() => {
     const requestOfficeData = async () => {
       const officeData = await fetchOffices();
       officeData && setSelectedPlayers(officeData)
     }
     requestOfficeData();
-  };
+  }, [selectedOffice])
 
 
   const handleRestart = () => {
