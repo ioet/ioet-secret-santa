@@ -67,7 +67,7 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
       'picture': jsonData['picture'],
     }
 
-    const response = await backend.post('/player');
+    const response = await backend.post('/player', body);
     response.status === 200 && setIsRegistered(true);
   }
 
