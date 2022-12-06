@@ -74,7 +74,7 @@ const Admin = ({ setIsAdmin, setIsLogged }: Props) => {
   }
 
   const handleStart = () => {
-    ['quito', 'guayaquil', 'loja'].map(office => {
+    ['quito', 'guayaquil', 'loja', 'argentina', 'international'].map(office => {
       startGameByOffice(office);
     })
     alert('Game started for all registered the offices succesfully!')
