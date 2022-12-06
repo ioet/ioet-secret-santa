@@ -85,7 +85,7 @@ const SecretSantaCard = () => {
                   ? secretSanta['wishes'].map((wish) => (
                     <Typography key={wish} textAlign='left'>- {wish}</Typography>
                   ))
-                  : <Typography textAlign='left'>- A surprice!</Typography>
+                  : <Typography textAlign='left'>- A surprise!</Typography>
               }
             </Box>
           </Box>
