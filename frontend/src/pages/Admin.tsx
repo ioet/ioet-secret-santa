@@ -38,12 +38,13 @@ const Admin = ({ setIsAdmin, setIsLogged }: Props) => {
 
   const handleChange = (event: SelectChangeEvent) => {
     setSelectedOffice(event.target.value as string);
+    setSelectedPlayers([]);
   };
 
   useEffect(() => {
     const requestOfficeData = async () => {
       const officeData = await fetchOffices();
-      officeData && setSelectedPlayers(officeData)
+      officeData && setSelectedPlayers(officeData['results']);
     }
     requestOfficeData();
   }, [selectedOffice])
@@ -142,20 +143,23 @@ const Admin = ({ setIsAdmin, setIsLogged }: Props) => {
                         onChange={handleChange}
                         required
                       >
-                        <MenuItem value={'Quito'}>Quito</MenuItem>
-                        <MenuItem value={'Guayaquil'}>Guayaquil</MenuItem>
-                        <MenuItem value={'Loja'}>Loja</MenuItem>
+                        <MenuItem value={'quito'}>Quito</MenuItem>
+                        <MenuItem value={'guayaquil'}>Guayaquil</MenuItem>
+                        <MenuItem value={'loja'}>Loja</MenuItem>
+                        <MenuItem value={'argentina'}>Argentina</MenuItem>
+                        <MenuItem value={'international'}>International</MenuItem>
                       </Select>
                     </FormControl>
-                    {
-                      selectedPlayers.map((result) => (
-                        <Typography
-                          key={result['player']['timestamp']}
-                        >
-                          {result['player']['name']} - {result['secret-santa']['name']}
-                        </Typography>
-                      ))
-                    }
+                    <Box sx={{ mt: 2 }}>
+                      {
+                        selectedPlayers.map((result) => (
+                          <Typography
+                            key={result['player']['timestamp']}
+                          >
+                            {result['player']['name']} - {result['secret_santa']['name']}
+                          </Typography>
+                        ))
+                      }</Box>
                   </CardContent>
                 </Card>
               </Box>
