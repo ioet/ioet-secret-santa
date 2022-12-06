@@ -119,8 +119,8 @@ function Renderer({ days, hours, minutes, seconds, completed }: CountdownProps) 
             <Typography
               variant='body1'
               marginTop={{
-                xs: 20,
-                sm: 20,
+                xs: 15,
+                sm: 15,
                 md: 10,
               }}
               sx={{ color: 'white', mb: 10 }}
