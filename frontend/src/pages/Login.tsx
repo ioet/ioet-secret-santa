@@ -15,12 +15,6 @@ const loginURL = `${envManager.AUTH_URL}/authn/login/${envManager.APP_NAME}`;
 const backend = axios.create({
   baseURL: envManager.BACKEND_URL,
   withCredentials: true,
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'origin': 'x-requested-with',
-    'Access-Control-Allow-Headers': 'POST, GET, PUT, DELETE, OPTIONS, HEAD, Authorization, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Origin',
-    'Content-Type': 'application/json',
-  },
 });
 
 const Login = ({ setIsLogged, setIsAdmin }: Props) => {
