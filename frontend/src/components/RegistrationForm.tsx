@@ -143,6 +143,11 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
                     You can enter three wishes in the application to make it easy for your Secret Santa or you can uncheck the box to be surprised with a gift.
                   </ListItemText>
                 </ListItem>
+                <ListItem>
+                  <ListItemText>
+                    If you are going to play internationally, it is recommended to give away digital games, gift cards, etc.
+                  </ListItemText>
+                </ListItem>
               </List>
             </Box>
           </Fade>
