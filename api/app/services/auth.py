@@ -9,7 +9,6 @@ env_settings = get_settings()
 
 async def get_session(request: Request):
     async with ClientSession(env_settings.authBackendURL, cookies=request.cookies) as session:
-        print(env_settings.authBackendURL)
         yield session
 
 
@@ -24,9 +23,6 @@ async def auth_with_internal_service(
 
 
 async def validate_user_session(http_session: ClientSession = Depends(get_session)):
-    url = f'/authz/user-permissions/{env_settings.appName}'
-    async with http_session.get(url) as response:
-        print(url)
-
+    async with http_session.get(f'/authz/user-permissions/{env_settings.appName}') as response:
         if not response.status == 200:
             raise HTTPException(401, "Could not validate credentials")

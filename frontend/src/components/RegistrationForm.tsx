@@ -54,25 +54,21 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
   }
 
   const handleSubmit = async () => {
-    if (validateFields()) {
-      const sessionStorageData = sessionStorage.getItem('user');
-      const jsonData = sessionStorageData && JSON.parse(sessionStorageData);
+    if (!validateFields()) alert('Fill all the required fields, please!');
 
-      let body = {
-        'region': selectedOffice,
-        'wishes': !checked ? [firstWish, secondWish, thirdWish] : '',
-        'name': jsonData['name'],
-        'email': jsonData['email'],
-        'picture': jsonData['picture'],
-      }
+    const sessionStorageData = sessionStorage.getItem('user');
+    const jsonData = sessionStorageData && JSON.parse(sessionStorageData);
 
-      const response = await backend.post('/player', body);
-      response.status === 200 && setIsRegistered(true);
-      console.log(response);
+    let body = {
+      'region': selectedOffice,
+      'wishes': !checked ? [firstWish, secondWish, thirdWish] : '',
+      'name': jsonData['name'],
+      'email': jsonData['email'],
+      'picture': jsonData['picture'],
     }
-    else {
-      alert('Fill all the required fields, please!');
-    }
+
+    const response = await backend.post('/player');
+    response.status === 200 && setIsRegistered(true);
   }
 
   return (

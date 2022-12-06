@@ -33,11 +33,7 @@ const Appbar = ({ isAdmin, setIsLogged }: Props) => {
   };
 
   const logoutUser = async () => {
-    try {
-      await backendLogout.get("/authn/logout");
-    } catch (error) {
-      console.log(error);
-    }
+    await backendLogout.get("/authn/logout");
   };
 
   const handleLogout = async () => {
