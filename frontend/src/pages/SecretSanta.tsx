@@ -30,19 +30,20 @@ const SecretSantaCard = () => {
     'name': '', 'wishes': [], 'picture': ""
   });
 
-  const sessionStorageData = sessionStorage.getItem('user');
-  const jsonData = sessionStorageData && JSON.parse(sessionStorageData);
 
   const fetchSecretSanta = async () => {
+    const sessionStorageData = sessionStorage.getItem('user');
+    const jsonData = sessionStorageData && JSON.parse(sessionStorageData);
     const response = await backend.get(`/results/email/${jsonData['email']}`)
-    return response.data === 200 ? response.data : null;
+    return response.status === 200 ? response.data : null;
+  }
+
+  const showSecretSanta = async () => {
+    const secretSantaData = await fetchSecretSanta();
+    secretSantaData && setSecretSanta(secretSantaData['secret_santa'])
   }
 
   useEffect(() => {
-    const showSecretSanta = async () => {
-      const secretSanta = await fetchSecretSanta();
-      secretSanta && setSecretSanta(secretSanta)
-    }
     showSecretSanta();
   }, [])
 

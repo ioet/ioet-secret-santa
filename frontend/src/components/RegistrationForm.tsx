@@ -50,7 +50,7 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
   };
 
   const validateFields = () => {
-    return selectedOffice !== '' && (!checked || (firstWish !== '' && secondWish !== '' && thirdWish !== ''));
+    return selectedOffice !== '' && (checked || (firstWish !== '' && secondWish !== '' && thirdWish !== ''));
   }
 
   const handleSubmit = async () => {
@@ -60,7 +60,7 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
 
       let body = {
         'region': selectedOffice,
-        'wishes': checked ? [firstWish, secondWish, thirdWish] : '',
+        'wishes': !checked ? [firstWish, secondWish, thirdWish] : '',
         'name': jsonData['name'],
         'email': jsonData['email'],
         'picture': jsonData['picture'],

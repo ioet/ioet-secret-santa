@@ -10,13 +10,11 @@ import {
   SelectChangeEvent,
   Button,
   Divider,
-  getBottomNavigationUtilityClass
 } from "@mui/material";
 import { useState } from "react"
 import Appbar from "../components/Appbar";
 import envManager from "../config/envManager";
 import axios from 'axios';
-import { isNullOrUndefined } from "util";
 
 
 const backend = axios.create({
@@ -68,7 +66,7 @@ const Admin = ({ setIsAdmin, setIsLogged }: Props) => {
   }
 
   const startGameByOffice = async (office: string) => {
-    const response = await backend.get(`/secret-santa/${office}`);
+    const response = await backend.post(`/secret-santa/${office}`);
     return response.status === 200;
   }
 
@@ -76,6 +74,7 @@ const Admin = ({ setIsAdmin, setIsLogged }: Props) => {
     ['quito', 'guayaquil', 'loja'].map(office => {
       startGameByOffice(office);
     })
+    alert('Game started for all registered the offices succesfully!')
   }
 
   const handlePlay = () => {
