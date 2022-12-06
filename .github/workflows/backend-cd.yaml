@@ -32,18 +32,21 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: "us-east-1"
 
-      # - name: Login to Amazon ECR
-      #   id: login-ecr
-      #   uses: aws-actions/amazon-ecr-login@v1
+      # Install SOPS
+      - name: Sops Binary Installer
+        uses: mdgreenwald/mozilla-sops-action@v1
 
-      - name: Build, tag, and push Secret santa image to Amazon ECR
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push secret Secret Santa to Amazon ECR
         env:
           ECR_REGISTRY_STEP: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 058565519576.dkr.ecr.us-east-1.amazonaws.com
           docker build -t secret-santa-repository .
-          docker tag secret-santa-repository:latest 058565519576.dkr.ecr.us-east-1.amazonaws.com/secret-santa-repository:latest
-          docker push 058565519576.dkr.ecr.us-east-1.amazonaws.com/secret-santa-repository:latest
+          docker tag secret-santa-repository $ECR_REGISTRY_STEP/secret-santa-repository:$IMAGE_TAG
+          docker push $ECR_REGISTRY_STEP/secret-santa-repository:$IMAGE_TAG
         working-directory: ./api         
 
       - name: Setup Terraform
@@ -55,11 +58,6 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.4
         with:
           ssh-private-key: ${{ secrets.INFRA_TERRAFORM_MODULES_SSH_PRIV_KEY }}
-
-      - name: Terraform Format
-        id: fmt
-        run: terraform fmt -check
-        working-directory: ./${{ env.WORKING_DIR }}
 
       - name: Terraform Init
         id: init
@@ -74,7 +72,9 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan -no-color
+        env:
+          TF_VAR_SECRET_SANTA_IMAGE: ${{ format('{0}/secret-santa-repository:{1}', steps.login-ecr.outputs.registry, github.sha) }}
+        run: terraform plan -no-color -var secret_santa_image=${{env.TF_VAR_SECRET_SANTA_IMAGE}}
         continue-on-error: true
         working-directory: ./${{ env.WORKING_DIR }}
 
@@ -111,5 +111,7 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve
+        env:
+          TF_VAR_SECRET_SANTA_IMAGE: ${{ format('{0}/secret-santa-repository:{1}', steps.login-ecr.outputs.registry, github.sha) }}
+        run: terraform apply -auto-approve -var secret_santa_image=${{env.TF_VAR_SECRET_SANTA_IMAGE}}
         working-directory: ./${{ env.WORKING_DIR }}
