@@ -9,6 +9,7 @@ env_settings = get_settings()
 
 async def get_session(request: Request):
     async with ClientSession(env_settings.authBackendURL, cookies=request.cookies) as session:
+        print(env_settings.authBackendURL)
         yield session
 
 
