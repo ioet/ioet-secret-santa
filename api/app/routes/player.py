@@ -51,3 +51,22 @@ async def create_player(req: Request) -> dict:
         return {'detail': "Successfully created"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f'Problem while creating the player. {str(e)}')
+
+@router.post('/create')
+async def create_player(req: Request) -> dict:
+    try:
+        body = await req.json()
+        registry = {
+            'region': body.get("region", "").strip().lower(),
+            'wishes': body.get("wishes"),
+            'name': body.get("name"),
+            'email': body.get("email"),
+            'picture': body.get("picture"),
+            'key': body.get("email").split('@')[0].replace('.', '_').lower(),
+            'timestamp': str(datetime.now())
+        }
+
+        save_register(document='players', registry=registry, key="key")
+        return {'detail': "Successfully created"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f'Problem while creating the player. {str(e)}')
