@@ -156,9 +156,11 @@ const RegistrationForm = ({ setIsRegistered }: Props) => {
             onChange={handleChange}
             required
           >
-            <MenuItem value={'Quito'}>Quito</MenuItem>
-            <MenuItem value={'Guayaquil'}>Guayaquil</MenuItem>
-            <MenuItem value={'Loja'}>Loja</MenuItem>
+            <MenuItem value={'quito'}>Quito</MenuItem>
+            <MenuItem value={'guayaquil'}>Guayaquil</MenuItem>
+            <MenuItem value={'loja'}>Loja</MenuItem>
+            <MenuItem value={'argentina'}>Argentina</MenuItem>
+            <MenuItem value={'international'}>International</MenuItem>
           </Select>
         </FormControl>
         <Typography variant="body1" component="div" sx={{ mb: 3 }} textAlign="left">{!checked ? 'I want to enter my christmas wishes' : 'Surprise me!'}<Checkbox sx={{ color: '#A30000', '&.Mui-checked': { color: '#A30000' }, }} checked={checked} onChange={handleChangeCheckbox} inputProps={{ 'aria-label': 'controlled' }} /></Typography>
