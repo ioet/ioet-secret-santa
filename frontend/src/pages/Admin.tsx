@@ -32,7 +32,7 @@ const Admin = ({ setIsAdmin, setIsLogged }: Props) => {
   const [selectedPlayers, setSelectedPlayers] = useState([]);
 
   const fetchOffices = async () => {
-    const response = await backend.get(`/results/region/${selectedOffice}`);
+    const response = await backend.get(`/results/region/${selectedOffice.toLowerCase()}`);
     return response.status === 200 ? response.data : null;
   }
 
