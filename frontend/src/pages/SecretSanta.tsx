@@ -118,7 +118,12 @@ function Renderer({ days, hours, minutes, seconds, completed }: CountdownProps) 
           : <Box sx={{ p: 5 }}>
             <Typography
               variant='body1'
-              sx={{ color: 'white', mb: 10, mt: 10 }}
+              marginTop={{
+                xs: 20,
+                sm: 20,
+                md: 10,
+              }}
+              sx={{ color: 'white', mb: 10 }}
             >Thank you for registering for the Christmas Secret Santa game! Wait until the counter reaches zero to find out who is your Secret Santa!</Typography>
             <Grid
               container
