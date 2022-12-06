@@ -6,10 +6,12 @@ on:
     paths:
       - "!infrastructure/frontend/**"
       - "infrastructure/backend/**"
+      - "api/app/**"
   pull_request:
     paths:
       - "!infrastructure/frontend/**"
       - "infrastructure/backend/**"
+      - "api/app/**"
 
 jobs:
   ci-cd:
