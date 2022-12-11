@@ -20,7 +20,7 @@ interface Props {
 }
 
 const Home = ({ isRegistered, setIsRegistered, isAdmin, setIsAdmin, setIsLogged }: Props) => {
-  const [registrationDeadline] = useState(envManager.REGISTRATION_DEADLINE);
+  const [registrationDeadline] = useState(envManager.REGISTRATION_DEADLINE.replace(/["']/g, ''));
 
   const sessionStorageData = sessionStorage.getItem('user');
   const jsonData = sessionStorageData && JSON.parse(sessionStorageData);
