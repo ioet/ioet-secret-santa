@@ -22,6 +22,7 @@ const backend = axios.create({
   withCredentials: true,
 });
 
+
 interface Props {
   setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>,
   setIsLogged: React.Dispatch<React.SetStateAction<boolean>>,
