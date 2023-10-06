@@ -66,7 +66,8 @@ const Registration = ({ setIsRegistered, countdown }: Props) => {
                 }}
                 sx={{
                   color: 'white',
-                  wordWrap: "break-word"
+                  wordWrap: "break-word",
+                  fontWeight: "bold",
                 }}
               >The registration countdown {canRegister ? 'begun!' : 'finished:('}</Typography>
               <Typography
@@ -76,7 +77,7 @@ const Registration = ({ setIsRegistered, countdown }: Props) => {
                   wordWrap: "break-word",
                   opacity: `${canRegister ? '1' : '0'}`
                 }}
-              >Join us in the Christmas Secret Santa game.</Typography>
+              >Join us in the Christmas Secret Santa game!</Typography>
             </Box>
             <Hidden only={['sm', 'xs']}>
               <Button onClick={scrollWindow} sx={{ width: '250px', color: '#A30000', bgcolor: '#fff', '&:hover': { bgcolor: '#bbb' }, opacity: `${canRegister ? '1' : '0'}` }}>Register</Button>

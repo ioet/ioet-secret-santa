@@ -115,9 +115,9 @@ function Renderer({ days, hours, minutes, seconds, completed }: CountdownProps) 
       {
         completed
           ? <SecretSantaCard />
-          : <Box sx={{ p: 5 }}>
+          : <Box sx={{ p: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <Typography
-              variant='body1'
+              variant='h6'
               marginTop={{
                 xs: 15,
                 sm: 15,
@@ -198,7 +198,8 @@ const SecretSanta = ({ countdown, setIsLogged }: Props) => {
         <Box
           sx={{
             display: 'flex',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
           width='100%'
           height='100%'
