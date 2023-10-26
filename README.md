@@ -11,6 +11,6 @@ npm run dev
 
 ### Backend
 1. `cd api`
-2. Create a Python 3.10.8 virtual environment
-3. `pip install -r requirements`
+2. Create a Python 3.9.0 virtual environment (python -m venv .venv)
+3. `python -m pip install -r requirements.txt`
 4. `python runner.py`

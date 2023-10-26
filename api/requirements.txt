@@ -3,7 +3,8 @@ uvicorn==0.20.0
 pydantic==1.10.2
 python-dotenv==0.21.0
 pycryptodome==3.15.0
-Pyrebase==3.0.27
+Pyrebase4==4.7.1
 aiohttp==3.8.3
 mangum==0.16.0
+charset-normalizer~=2.0.0
 requests==2.26.0
