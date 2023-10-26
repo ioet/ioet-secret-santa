@@ -1,6 +1,5 @@
-import { Typography, Grid } from "@mui/material";
-import { useEffect } from "react";
-import '../styles/Renderer.css'
+import { Grid, Typography } from '@mui/material';
+import '../styles/Renderer.css';
 interface CountdownProps {
   days: number,
   hours: number,

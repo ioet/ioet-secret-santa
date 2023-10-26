@@ -1,3 +1,8 @@
+import Appbar from '../components/Appbar';
+import axios from 'axios';
+import envManager from '../config/envManager';
+import { useEffect, useState } from 'react';
+import { useUserContext } from '../hooks/useUserContext';
 import {
   Box,
   Card,
@@ -11,26 +16,17 @@ import {
   Button,
   Divider,
 } from "@mui/material";
-import { useEffect, useState } from "react"
-import Appbar from "../components/Appbar";
-import envManager from "../config/envManager";
-import axios from 'axios';
-
 
 const backend = axios.create({
   baseURL: envManager.BACKEND_URL,
   withCredentials: true,
 });
 
-
-interface Props {
-  setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>,
-}
-
-const Admin = ({ setIsAdmin, setIsLogged }: Props) => {
+const Admin = () => {
   const [selectedOffice, setSelectedOffice] = useState('');
   const [selectedPlayers, setSelectedPlayers] = useState([]);
+
+  const { setIsAdmin, setIsLogged } = useUserContext();
 
   const fetchOffices = async () => {
     const response = await backend.get(`/results/region/${selectedOffice.toLowerCase()}`);
@@ -102,7 +98,7 @@ const Admin = ({ setIsAdmin, setIsLogged }: Props) => {
           width='100%'
           height='100%'
         >
-          <Appbar isAdmin={true} setIsLogged={setIsLogged} />
+          <Appbar />
           <Box
             sx={{ mt: '64px' }}
             display={{

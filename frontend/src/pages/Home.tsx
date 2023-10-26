@@ -1,25 +1,23 @@
-import { useEffect, useState } from 'react';
-import Registration from './Registration';
 import Admin from './Admin';
-import envManager from "../config/envManager";
-import SecretSanta from './SecretSanta';
 import axios from 'axios';
-
+import envManager from '../config/envManager';
+import Registration from './Registration';
+import SecretSanta from './SecretSanta';
+import { useEffect, useState } from 'react';
+import { useUserContext } from '../hooks/useUserContext';
 
 const backend = axios.create({
   baseURL: envManager.BACKEND_URL,
   withCredentials: true,
 });
 
-interface Props {
-  isRegistered: boolean,
-  setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>,
-  isAdmin: boolean,
-  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>,
-}
+const Home = () => {
+  const { 
+    isRegistered, 
+    setIsRegistered, 
+    isAdmin, 
+  } = useUserContext();
 
-const Home = ({ isRegistered, setIsRegistered, isAdmin, setIsAdmin, setIsLogged }: Props) => {
   const [registrationDeadline] = useState(envManager.REGISTRATION_DEADLINE.replace(/["']/g, ''));
 
   const sessionStorageData = sessionStorage.getItem('user');
@@ -42,12 +40,12 @@ const Home = ({ isRegistered, setIsRegistered, isAdmin, setIsAdmin, setIsLogged 
     <>
       {
         isAdmin
-          ? <Admin setIsAdmin={setIsAdmin} setIsLogged={setIsLogged} />
+          ? <Admin />
           : <>
             {
               isRegistered
-                ? <SecretSanta countdown={registrationDeadline} setIsLogged={setIsLogged} />
-                : <Registration setIsRegistered={setIsRegistered} countdown={registrationDeadline} />
+                ? <SecretSanta countdown={registrationDeadline} />
+                : <Registration countdown={registrationDeadline} />
             }
           </>
       }

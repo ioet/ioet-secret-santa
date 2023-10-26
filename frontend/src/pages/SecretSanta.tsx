@@ -1,11 +1,18 @@
-import { Typography, Box, Card, CardContent, Divider, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
-import Countdown from "react-countdown";
-import Appbar from "../components/Appbar";
-import '../styles/Renderer.css'
-import envManager from "../config/envManager";
+import Appbar from '../components/Appbar';
 import axios from 'axios';
-
+import Countdown from 'react-countdown';
+import envManager from '../config/envManager';
+import {
+  Box,
+  Card,
+  CardContent,
+  Divider,
+  Grid,
+  Typography
+  } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useUserContext } from '../hooks/useUserContext';
+import '../styles/Renderer.css';
 
 const backend = axios.create({
   baseURL: envManager.BACKEND_URL,
@@ -14,7 +21,6 @@ const backend = axios.create({
 
 interface Props {
   countdown: any,
-  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 interface CountdownProps {
@@ -184,7 +190,8 @@ function Renderer({ days, hours, minutes, seconds, completed }: CountdownProps) 
   )
 };
 
-const SecretSanta = ({ countdown, setIsLogged }: Props) => {
+const SecretSanta = ({ countdown }: Props) => {
+  const { setIsLogged } = useUserContext();
   return (
     <Box display='block' width='100%'>
       <Box
@@ -204,7 +211,7 @@ const SecretSanta = ({ countdown, setIsLogged }: Props) => {
           width='100%'
           height='100%'
         >
-          <Appbar setIsLogged={setIsLogged} />
+          <Appbar />
           <Box sx={{ textAlign: 'center', width: '80%' }}>
             <Countdown date={countdown} renderer={Renderer} />
           </Box>

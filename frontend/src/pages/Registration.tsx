@@ -1,16 +1,20 @@
-import { Typography, Hidden, Button, Box, Grid } from "@mui/material";
-import { useState } from "react";
-import Countdown from "react-countdown";
-import Image from ".././assets/christmas-gifts.webp"
-import RegistrationForm from "../components/RegistrationForm";
-import Renderer from ".././components/Renderer"
+import Countdown from 'react-countdown';
+import Image from '.././assets/christmas-gifts.webp';
+import RegistrationForm from '../components/RegistrationForm';
+import Renderer from '.././components/Renderer';
+import {
+  Box,
+  Button,
+  Hidden,
+  Typography
+  } from '@mui/material';
+import { useState } from 'react';
 
 interface Props {
-  setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>,
   countdown: any,
 }
 
-const Registration = ({ setIsRegistered, countdown }: Props) => {
+const Registration = ({ countdown }: Props) => {
   const [canRegister, setCanRegister] = useState(true);
 
   const scrollWindow = () => {
@@ -126,7 +130,7 @@ const Registration = ({ setIsRegistered, countdown }: Props) => {
           width='100%'
           height='100vh'
         >
-          <RegistrationForm setIsRegistered={setIsRegistered} />
+          <RegistrationForm />
         </Box>
       }
     </Box >

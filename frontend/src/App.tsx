@@ -1,18 +1,16 @@
-import { useState, useEffect } from 'react'
-import Login from './pages/Login';
 import Home from './pages/Home';
+import Login from './pages/Login';
+import { useUserContext } from './hooks/useUserContext';
 
 const App = () => {
-  const [isLogged, setIsLogged] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const { isLogged } = useUserContext();
 
   return (
     <>
       {
         isLogged
-          ? <Home isRegistered={isRegistered} setIsRegistered={setIsRegistered} isAdmin={isAdmin} setIsLogged={setIsLogged} setIsAdmin={setIsAdmin} />
-          : <Login setIsLogged={setIsLogged} setIsAdmin={setIsAdmin} />
+          ? <Home />
+          : <Login />
       }
     </>
   )

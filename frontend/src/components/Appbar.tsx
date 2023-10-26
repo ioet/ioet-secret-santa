@@ -1,24 +1,21 @@
-import axios from "axios"
+import axios from 'axios';
+import envManager from '../config/envManager';
 import {
   AppBar,
-  Toolbar,
-  Typography,
+  Avatar,
   IconButton,
   Menu,
   MenuItem,
-  Avatar
-} from '@mui/material';
+  Toolbar,
+  Typography
+  } from '@mui/material';
 import { useState } from 'react';
-import envManager from '../config/envManager';
+import { useUserContext } from '../hooks/useUserContext';
 
-interface Props {
-  isAdmin?: boolean,
-  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>,
-}
-
-const Appbar = ({ isAdmin, setIsLogged }: Props) => {
-
+const Appbar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const {setIsLogged, isAdmin} = useUserContext();
 
   const backendLogout = axios.create({
     baseURL: envManager.AUTH_URL,

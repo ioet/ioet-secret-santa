@@ -1,3 +1,7 @@
+import axios from 'axios';
+import envManager from '../config/envManager';
+import { useState } from 'react';
+import { useUserContext } from '../hooks/useUserContext';
 import {
   Box,
   Select,
@@ -16,9 +20,6 @@ import {
   ListItemText,
   Checkbox,
 } from "@mui/material";
-import { useState } from 'react';
-import envManager from "../config/envManager";
-import axios from 'axios';
 
 
 const backend = axios.create({
@@ -26,17 +27,15 @@ const backend = axios.create({
   withCredentials: true,
 });
 
-interface Props {
-  setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>,
-}
-
-const RegistrationForm = ({ setIsRegistered }: Props) => {
+const RegistrationForm = () => {
   const [selectedOffice, setSelectedOffice] = useState('');
   const [firstWish, setFirstWish] = useState('');
   const [secondWish, setSecondWish] = useState('');
   const [thirdWish, setThirdWish] = useState('');
   const [checked, setChecked] = useState(true);
   const [open, setOpen] = useState(false);
+
+  const { setIsRegistered } = useUserContext();
 
   const handleChange = (event: SelectChangeEvent) => {
     setSelectedOffice(event.target.value as string);
