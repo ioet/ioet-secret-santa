@@ -11,8 +11,8 @@ import {
   Typography
   } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useUserContext } from '../hooks/useUserContext';
 import '../styles/Renderer.css';
+import confetti from 'canvas-confetti'
 
 const backend = axios.create({
   baseURL: envManager.BACKEND_URL,
@@ -31,10 +31,24 @@ interface CountdownProps {
   completed: boolean,
 }
 
+interface WaitingCountdownProps {
+  days: number,
+  hours: number,
+  minutes: number,
+  seconds: number,
+}
+
 const SecretSantaCard = () => {
   const [secretSanta, setSecretSanta] = useState({
     'name': '', 'wishes': [], 'picture': ""
   });
+
+  useEffect(() => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+    });
+  }, [])
 
 
   const fetchSecretSanta = async () => {
@@ -55,11 +69,6 @@ const SecretSantaCard = () => {
 
   return (
     <Box
-      padding={{
-        sm: 5,
-        xs: 5,
-        md: 15,
-      }}
       height='50%'
     >
       <Card>
@@ -68,7 +77,11 @@ const SecretSantaCard = () => {
           <Divider />
           <Box
             display='flex'
-            flexDirection='row'
+            flexDirection={{
+              md: 'row',
+              sm: 'column',
+              xs: 'column',
+            }}
             sx={{ justifyContent: 'space-evenly', mb: 3 }}
           >
             <Box
@@ -101,8 +114,7 @@ const SecretSantaCard = () => {
   )
 }
 
-function Renderer({ days, hours, minutes, seconds, completed }: CountdownProps) {
-
+const WaitingCountdown = ({ days, hours, minutes, seconds }: WaitingCountdownProps) => {
   function getFirstNumber(date: number) {
     if (date < 10) {
       return 0;
@@ -116,19 +128,37 @@ function Renderer({ days, hours, minutes, seconds, completed }: CountdownProps) 
     return Number(secondDigit);
   }
 
+  useEffect(() => {
+    function randomInRange(min: number, max: number) {
+      return Math.random() * (max - min) + min;
+    }
+    
+    function createSnowflake() {
+      confetti({
+        particleCount: 1,
+        startVelocity: 0,
+        ticks: 500,
+        origin: {
+          x: Math.random(),
+          y: 0,
+        },
+        colors: ['#ffffff'],
+        shapes: ['circle'],
+        gravity: randomInRange(0.4, 0.6),
+        scalar: randomInRange(0.4, 1),
+        drift: randomInRange(-0.4, 0.4),
+      });
+    
+      requestAnimationFrame(createSnowflake);
+    }
+    
+    createSnowflake();
+  }, [])
+
   return (
-    <>
-      {
-        completed
-          ? <SecretSantaCard />
-          : <Box sx={{ p: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+    <Box sx={{ p: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <Typography
               variant='h6'
-              marginTop={{
-                xs: 15,
-                sm: 15,
-                md: 10,
-              }}
               sx={{ color: 'white', mb: 10 }}
             >Thank you for registering for the Christmas Secret Santa game! Wait until the counter reaches zero to find out who is your Secret Santa!</Typography>
             <Grid
@@ -185,13 +215,27 @@ function Renderer({ days, hours, minutes, seconds, completed }: CountdownProps) 
               </div>
             </Grid>
           </Box>
+  )
+}
+
+function Renderer({ days, hours, minutes, seconds, completed }: CountdownProps) {
+  return (
+    <>
+      {
+        completed
+          ? <SecretSantaCard />
+          : <WaitingCountdown
+              days={days}
+              hours={hours}
+              minutes={minutes}
+              seconds={seconds}
+            />
       }
     </>
   )
 };
 
 const SecretSanta = ({ countdown }: Props) => {
-  const { setIsLogged } = useUserContext();
   return (
     <Box display='block' width='100%'>
       <Box

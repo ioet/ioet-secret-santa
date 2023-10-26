@@ -3,6 +3,7 @@ import envManager from '../config/envManager';
 import {
   AppBar,
   Avatar,
+  Box,
   IconButton,
   Menu,
   MenuItem,
@@ -42,12 +43,13 @@ const Appbar = () => {
   const jsonData = sessionStorageData && JSON.parse(sessionStorageData);
 
   return (
-    <AppBar sx={{ height: '64px', bgcolor: 'white' }}>
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: '#A30000' }}>
-          Secret Santa {isAdmin && '- Admin'}
-        </Typography>
-        <div>
+    <AppBar sx={{ height: '64px', bgcolor: 'transparent', boxShadow: 'none' }}>
+      <Toolbar sx={{ width: "100%", display: 'flex', justifyContent: 'end'}}>
+        <Box display='flex' alignItems='center' padding='20px'>
+          <Box display='flex' flexDirection='column'>
+            <Typography variant='body2' component='span' fontWeight={800} display='flex' justifyContent='end'>Welcome</Typography>
+            <Typography variant='body1' component='span'>{jsonData['name']}</Typography>
+          </Box>
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -74,7 +76,7 @@ const Appbar = () => {
           >
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
-        </div>
+        </Box>
       </Toolbar>
     </AppBar>
   );
