@@ -1,5 +1,5 @@
 from app.services.auth import auth_with_internal_service
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, Depends
 from app.services import calculate_secret_santa_results, get_data_by_attribute, save_register
 
 router = APIRouter()
@@ -17,6 +17,6 @@ async def calculate_results(region: str) -> dict:
         }
 
         save_register(document='secret-santa', registry=registry, key='region')
-        return {'detail': " Successfully created"}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f'Problem while creating the results. {str(e)}')
+        return {'detail': "Successfully created"}
+    except Exception:
+        return {'error_message': "Problem while creating the results."}
