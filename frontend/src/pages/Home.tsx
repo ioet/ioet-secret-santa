@@ -1,21 +1,16 @@
 import Admin from './Admin';
-import axios from 'axios';
 import envManager from '../config/envManager';
 import Registration from './Registration';
 import SecretSanta from './SecretSanta';
+import { getRegistrationStatus } from '../services/player';
 import { useEffect, useState } from 'react';
 import { useUserContext } from '../hooks/useUserContext';
 
-const backend = axios.create({
-  baseURL: envManager.BACKEND_URL,
-  withCredentials: true,
-});
-
 const Home = () => {
-  const { 
-    isRegistered, 
-    setIsRegistered, 
-    isAdmin, 
+  const {
+    isRegistered,
+    setIsRegistered,
+    isAdmin,
   } = useUserContext();
 
   const [registrationDeadline] = useState(envManager.REGISTRATION_DEADLINE.replace(/["']/g, ''));
@@ -23,34 +18,23 @@ const Home = () => {
   const sessionStorageData = sessionStorage.getItem('user');
   const jsonData = sessionStorageData && JSON.parse(sessionStorageData);
 
-  const fetchRegistrationStatus = async () => {
-    const response = await backend.get(`/player/get/${jsonData['email']}`);
-    return response.status === 200 ? response.data : null;
-  }
-
   useEffect(() => {
     const validateRegistrationStatus = async () => {
-      const status = await fetchRegistrationStatus();
+      const status = await getRegistrationStatus(jsonData['email']);
       status && setIsRegistered(status['is_player_registered'])
     }
     validateRegistrationStatus();
   }, [])
 
-  return (
-    <>
+  return isAdmin
+    ? <Admin />
+    : <>
       {
-        isAdmin
-          ? <Admin />
-          : <>
-            {
-              isRegistered
-                ? <SecretSanta countdown={registrationDeadline} />
-                : <Registration countdown={registrationDeadline} />
-            }
-          </>
+        isRegistered
+          ? <SecretSanta countdown={registrationDeadline} />
+          : <Registration countdown={registrationDeadline} />
       }
     </>
-  );
 }
 
 export default Home;

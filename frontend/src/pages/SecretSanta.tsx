@@ -1,7 +1,6 @@
 import Appbar from '../components/Appbar';
-import axios from 'axios';
+import confetti from 'canvas-confetti';
 import Countdown from 'react-countdown';
-import envManager from '../config/envManager';
 import {
   Box,
   Card,
@@ -10,14 +9,9 @@ import {
   Grid,
   Typography
   } from '@mui/material';
+import { getSecretSanta } from '../services/player';
 import { useEffect, useState } from 'react';
 import '../styles/Renderer.css';
-import confetti from 'canvas-confetti'
-
-const backend = axios.create({
-  baseURL: envManager.BACKEND_URL,
-  withCredentials: true,
-});
 
 interface Props {
   countdown: any,
@@ -54,8 +48,7 @@ const SecretSantaCard = () => {
   const fetchSecretSanta = async () => {
     const sessionStorageData = sessionStorage.getItem('user');
     const jsonData = sessionStorageData && JSON.parse(sessionStorageData);
-    const response = await backend.get(`/results/email/${jsonData['email']}`)
-    return response.status === 200 ? response.data : null;
+    return await getSecretSanta(jsonData['email']);
   }
 
   const showSecretSanta = async () => {

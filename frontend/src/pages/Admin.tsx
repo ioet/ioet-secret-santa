@@ -1,6 +1,5 @@
 import Appbar from '../components/Appbar';
-import axios from 'axios';
-import envManager from '../config/envManager';
+import { getResultsByOffice, startGameByOffice } from '../services/admin';
 import { useEffect, useState } from 'react';
 import { useUserContext } from '../hooks/useUserContext';
 import {
@@ -17,21 +16,11 @@ import {
   Divider,
 } from "@mui/material";
 
-const backend = axios.create({
-  baseURL: envManager.BACKEND_URL,
-  withCredentials: true,
-});
-
 const Admin = () => {
   const [selectedOffice, setSelectedOffice] = useState('');
   const [selectedPlayers, setSelectedPlayers] = useState([]);
 
-  const { setIsAdmin, setIsLogged } = useUserContext();
-
-  const fetchOffices = async () => {
-    const response = await backend.get(`/results/region/${selectedOffice.toLowerCase()}`);
-    return response.status === 200 ? response.data : null;
-  }
+  const { setIsAdmin } = useUserContext();
 
   const handleChange = (event: SelectChangeEvent) => {
     setSelectedOffice(event.target.value as string);
@@ -40,7 +29,7 @@ const Admin = () => {
 
   useEffect(() => {
     const requestOfficeData = async () => {
-      const officeData = await fetchOffices();
+      const officeData = await getResultsByOffice(selectedOffice);
       officeData && setSelectedPlayers(officeData['results']);
     }
     requestOfficeData();
@@ -63,11 +52,6 @@ const Admin = () => {
         }
       }
     }
-  }
-
-  const startGameByOffice = async (office: string) => {
-    const response = await backend.post(`/secret-santa/${office}`);
-    return response.status === 200;
   }
 
   const handleStart = () => {

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import BackgoundImage from '../assets/christmas_background.gif';
 import envManager from '../config/envManager';
 import IOETLogo from '../assets/ioet.png';
@@ -9,47 +8,31 @@ import {
   Grid,
   Snackbar
   } from '@mui/material';
+import { getUserPermissions } from '../services/auth';
 import { useEffect, useState } from 'react';
 import { useUserContext } from '../hooks/useUserContext';
 
 const loginURL = `${envManager.AUTH_URL}/authn/login/${envManager.APP_NAME}`;
-const backend = axios.create({
-  baseURL: envManager.BACKEND_URL,
-  withCredentials: true,
-});
 
 const Login = () => {
   const [showError, setShowError] = useState<string | null>(null);
   const { setIsLogged, setIsAdmin } = useUserContext();
 
   useEffect(() => {
-    const getUserPermissions = async () => {
-      try {
-        const response = await backend.get("/api/authz/user-permissions");
-        if(response?.data.error_message) {
-          setShowError(response.data.error_message)
-          return null;
-        } else {
-          return response?.data;
-        }
-      } catch (error) {
-        return null;
-      }
-    };
-
     const fetchAndCheckUserPermissions = async () => {
       const user = await getUserPermissions();
-      if (user) {
-        sessionStorage.setItem("user", JSON.stringify(user));
-        setIsLogged(true);
-
-        user["roles"][envManager.APP_NAME].map((role: string) => {
-          role === "admin" && setIsAdmin(true)
-        })
-      } else {
+      if (!user) {
         sessionStorage.clear();
+        return;
       }
-    };
+
+      sessionStorage.setItem("user", JSON.stringify(user));
+      setIsLogged(true);
+
+      user["roles"][envManager.APP_NAME].map((role: string) => {
+        role === "admin" && setIsAdmin(true)
+      })
+    }
 
     fetchAndCheckUserPermissions();
   }, []);
