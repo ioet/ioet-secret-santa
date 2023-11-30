@@ -1,5 +1,5 @@
 from app.services.auth import auth_with_internal_service
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from app.services import get_data, get_data_by_id, get_data_by_region
 
 router = APIRouter()
