@@ -59,6 +59,7 @@ const RegistrationForm = () => {
     const jsonData = sessionStorageData && JSON.parse(sessionStorageData);
 
     let body = {
+      'id': jsonData['id'],
       'region': selectedOffice,
       'wishes': !checked ? [firstWish, secondWish, thirdWish] : '',
       'name': jsonData['name'],
