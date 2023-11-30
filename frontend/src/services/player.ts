@@ -6,12 +6,12 @@ const backend = axios.create({
   withCredentials: true,
 });
 
-export const getRegistrationStatus = async (email: string) => {
-  const response = await backend.get(`/player/get/${email}`);
+export const getRegistrationStatus = async (id: string) => {
+  const response = await backend.get(`/player/get/${id}`);
   return response?.data.error_message ? null : response.data;
 }
 
-export const getSecretSanta = async (email: string) => {
-  const response = await backend.get(`/results/email/${email}`)
+export const getSecretSanta = async (id: string) => {
+  const response = await backend.get(`/results/id/${id}`)
   return response.status === 200 ? response.data : null;
 }

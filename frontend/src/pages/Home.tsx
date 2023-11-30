@@ -20,7 +20,7 @@ const Home = () => {
 
   useEffect(() => {
     const validateRegistrationStatus = async () => {
-      const status = await getRegistrationStatus(jsonData['email']);
+      const status = await getRegistrationStatus(jsonData['id']);
       status && setIsRegistered(status['is_player_registered'])
     }
     validateRegistrationStatus();

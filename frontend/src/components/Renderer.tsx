@@ -1,5 +1,5 @@
-import { Grid, Typography } from '@mui/material';
-import '../styles/Renderer.css';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
+import CountdownBox from './CountdownBox';
 interface CountdownProps {
   days: number,
   hours: number,
@@ -10,76 +10,22 @@ interface CountdownProps {
 }
 
 function Renderer({ days, hours, minutes, seconds, completed, setCanRegister }: CountdownProps) {
-
-  function getFirstNumber(date: number) {
-    if (date < 10) {
-      return 0;
-    }
-    const firstDigit = date.toString().substring(0, 1);
-    return firstDigit;
-  }
-
-  function getSecondNumber(date: number) {
-    const secondDigit = date.toString().slice(-1);
-    return Number(secondDigit);
-  }
-
   if (completed) setCanRegister(false);
 
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
-    <Grid
-      container
-      alignItems="center"
-      justifyContent="center"
-    >
-      <div className="date-group">
-        <div style={{ 'display': 'flex' }}>
-          <Grid item width={{ xs: '50px', sm: '50px', md: '75px' }} height={{ xs: '75px', sm: '75px', md: '100px' }} border={1} textAlign="center" sx={{ mr: 1, backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
-            <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ pt: 2.5 }}>{getFirstNumber(days)}</Typography>
-          </Grid>
-          <Grid item width={{ xs: '50px', sm: '50px', md: '75px' }} height={{ xs: '75px', sm: '75px', md: '100px' }} border={1} textAlign="center" sx={{ backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
-            <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ pt: 2.5 }}>{getSecondNumber(days)}</Typography>
-          </Grid>
-        </div>
-        <Typography variant="h6" sx={{ pt: 1, color: '#fff' }}>DAYS</Typography>
-      </div>
-      <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ color: '#fff', mr: 1, mb: 7, ml: 1 }} align='center'>:</Typography>
-      <div className="date-group">
-        <div style={{ 'display': 'flex' }}>
-          <Grid item width={{ xs: '50px', sm: '50px', md: '75px' }} height={{ xs: '75px', sm: '75px', md: '100px' }} border={1} textAlign="center" sx={{ mr: 1, backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
-            <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ pt: 2.5 }}>{getFirstNumber(hours)}</Typography>
-          </Grid>
-          <Grid item width={{ xs: '50px', sm: '50px', md: '75px' }} height={{ xs: '75px', sm: '75px', md: '100px' }} border={1} textAlign="center" sx={{ backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
-            <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ pt: 2.5 }}>{getSecondNumber(hours)}</Typography>
-          </Grid>
-        </div>
-        <Typography variant="h6" sx={{ pt: 1, color: '#fff' }}>HOURS</Typography>
-      </div>
-      <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ color: '#fff', mr: 1, mb: 7, ml: 1 }}>:</Typography>
-      <div className="date-group">
-        <div style={{ 'display': 'flex' }}>
-          <Grid item width={{ xs: '50px', sm: '50px', md: '75px' }} height={{ xs: '75px', sm: '75px', md: '100px' }} border={1} textAlign="center" sx={{ mr: 1, backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
-            <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ pt: 2.5 }}>{getFirstNumber(minutes)}</Typography>
-          </Grid>
-          <Grid item width={{ xs: '50px', sm: '50px', md: '75px' }} height={{ xs: '75px', sm: '75px', md: '100px' }} border={1} textAlign="center" sx={{ backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
-            <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ pt: 2.5 }}>{getSecondNumber(minutes)}</Typography>
-          </Grid>
-        </div>
-        <Typography variant="h6" sx={{ pt: 1, color: '#fff' }}>MINUTES</Typography>
-      </div>
-      <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ color: '#fff', mr: 1, mb: 7, ml: 1 }}>:</Typography>
-      <div className="date-group">
-        <div style={{ 'display': 'flex' }}>
-          <Grid item width={{ xs: '50px', sm: '50px', md: '75px' }} height={{ xs: '75px', sm: '75px', md: '100px' }} border={1} textAlign="center" sx={{ mr: 1, backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
-            <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ pt: 2.5 }}>{getFirstNumber(seconds)}</Typography>
-          </Grid>
-          <Grid item width={{ xs: '50px', sm: '50px', md: '75px' }} height={{ xs: '75px', sm: '75px', md: '100px' }} border={1} textAlign="center" sx={{ mr: 1, backgroundColor: '#fff', borderColor: '#fff', borderRadius: 3, color: '#6B2424' }}>
-            <Typography fontSize={{ xs: 25, sm: 25, md: 40 }} sx={{ pt: 2.5 }}>{getSecondNumber(seconds)}</Typography>
-          </Grid>
-        </div>
-        <Typography variant="h6" sx={{ pt: 1, color: '#fff' }}>SECONDS</Typography>
-      </div>
-    </Grid>
+    <Box display='flex' flexDirection='row' gap={2} justifyContent='center' alignItems='center' my={2}>
+      <Box display='flex' flexDirection={isSmallScreen ? 'column' : 'row'} gap={2}>
+        <CountdownBox count={days} title='Days' isRegistrarion />
+        <CountdownBox count={hours} title='Hours' isRegistrarion />
+      </Box>
+      <Box display='flex' flexDirection={isSmallScreen ? 'column' : 'row'} gap={2}>
+        <CountdownBox count={minutes} title='Minutes' isRegistrarion />
+        <CountdownBox count={seconds} title='Seconds' isRegistrarion />
+      </Box>
+    </Box>
   );
 };
 
