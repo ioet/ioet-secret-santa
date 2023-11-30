@@ -5,7 +5,7 @@ from app.services import calculate_secret_santa_results, get_data_by_attribute, 
 router = APIRouter()
 
 @router.post("/{region}")
-async def calculate_results(region: str) -> dict:
+async def calculate_results(region: str, _=Depends(auth_with_internal_service)) -> dict:
     try:
         region = region.strip().lower()
         players = get_data_by_attribute(document='players', attribute="region", value=region)
