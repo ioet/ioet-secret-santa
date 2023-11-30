@@ -1,7 +1,6 @@
-from app.services.auth import auth_with_internal_service
-from fastapi import APIRouter, Depends, Request
-from datetime import datetime
-from app.services import get_data, get_data_by_attribute, save_register
+from app.models.player import Player
+from fastapi import APIRouter, Request
+from app.services import get_data, get_data_by_attribute, save_player
 
 router = APIRouter()
 
@@ -20,10 +19,10 @@ async def get_players_by_region(region: str) -> list:
     except Exception:
         return {'error_message': 'There are no players in that region.'}
 
-@router.get('/get/{email}')
-async def is_player_registered(email: str) -> list:
+@router.get('/get/{id}')
+async def is_player_registered(id: str) -> list:
     try:
-        player = get_data_by_attribute(document='players', attribute="email", value=email)
+        player = get_data_by_attribute(document='players', attribute="id", value=id)
         if player:
             return {'is_player_registered': True, 'player': player[0]}
 
@@ -35,18 +34,9 @@ async def is_player_registered(email: str) -> list:
 @router.post('/')
 async def create_player(req: Request) -> dict:
     try:
-        body = await req.json()
-        registry = {
-            'region': body.get("region", "").strip().lower(),
-            'wishes': body.get("wishes"),
-            'name': body.get("name"),
-            'email': body.get("email"),
-            'picture': body.get("picture"),
-            'key': body.get("email").split('@')[0].replace('.', '_').lower(),
-            'timestamp': str(datetime.now())
-        }
-
-        save_register(document='players', registry=registry, key="key")
+        raw_player = await req.json()
+        player = Player.create(raw_player)
+        save_player(document='players', registry=player)
         return {'detail': "Successfully created"}
     except Exception:
         return {'error_message': f'Problem while creating the player.'}

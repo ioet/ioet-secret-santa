@@ -1,6 +1,5 @@
-from app.services.auth import auth_with_internal_service
-from fastapi import APIRouter, Depends
-from app.services import get_data, get_data_by_email, get_data_by_region
+from fastapi import APIRouter
+from app.services import get_data, get_data_by_id, get_data_by_region
 
 router = APIRouter()
 
@@ -20,9 +19,9 @@ async def get_result_by_region(region: str) -> dict:
     return {'error_message': 'Region entered does not exist.'}
 
 
-@router.get("/email/{email}")
-async def get_result_by_email(email: str) -> dict:
-    result = get_data_by_email(document='secret-santa', email=email)
+@router.get("/id/{id}")
+async def get_result_by_id(id: str) -> dict:
+    result = get_data_by_id(document='secret-santa', id=id)
     if result:
         return result
-    return {'error_message': 'Email entered does not exist.'}
+    return {'error_message': 'id entered does not exist.'}

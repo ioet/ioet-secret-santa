@@ -7,9 +7,9 @@ router = APIRouter()
 @router.post("/{region}")
 async def calculate_results(region: str) -> dict:
     try:
+        region = region.strip().lower()
         players = get_data_by_attribute(document='players', attribute="region", value=region)
         results = calculate_secret_santa_results(players)
-        region = region.strip().lower()
 
         registry = {
             'region': region,
