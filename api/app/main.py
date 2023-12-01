@@ -21,4 +21,5 @@ app.add_middleware(
 async def startup_event() -> None:
     register_routers(app, 'app.routes')
 
+
 handler = Mangum(app)
