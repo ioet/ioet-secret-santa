@@ -36,7 +36,8 @@ jobs:
 
       # Install SOPS
       - name: Sops Binary Installer
-        uses: mdgreenwald/mozilla-sops-action@v1
+        uses: mdgreenwald/mozilla-sops-action@v1.4.1
+        id: install
 
       - name: Login to Amazon ECR
         id: login-ecr
@@ -49,7 +50,7 @@ jobs:
           docker build -t secret-santa-repository .
           docker tag secret-santa-repository $ECR_REGISTRY_STEP/secret-santa-repository:$IMAGE_TAG
           docker push $ECR_REGISTRY_STEP/secret-santa-repository:$IMAGE_TAG
-        working-directory: ./api         
+        working-directory: ./api
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
