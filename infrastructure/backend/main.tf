@@ -89,7 +89,8 @@ resource "aws_lambda_function" "secret-santa_lambda" {
       "appId" = sensitive(data.external.sops_secrets_variable.result["appId"]),
       "measurementId" = sensitive(data.external.sops_secrets_variable.result["measurementId"]),
       "appName" = sensitive(data.external.sops_secrets_variable.result["appName"]),
-      "authBackendURL" = sensitive(data.external.sops_secrets_variable.result["authBackendURL"])
+      "authBackendURL" = sensitive(data.external.sops_secrets_variable.result["authBackendURL"]),
+      "frontendURL" = sensitive(data.external.sops_secrets_variable.result["frontendURL"]),
     }
   }
 }
