@@ -10,4 +10,4 @@ env_settings = get_settings()
 
 @router.get("/")
 async def home() -> dict:
-    return {'Ioet Secret-Santa backend': 'v0.1.1'}
+    return {'Ioet Secret-Santa backend': 'v1.1.1'}
