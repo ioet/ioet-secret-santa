@@ -12,7 +12,8 @@ import { getUserPermissions } from '../services/auth';
 import { useEffect, useState } from 'react';
 import { useUserContext } from '../hooks/useUserContext';
 
-const loginURL = `${envManager.AUTH_URL}/authn/login/${envManager.APP_NAME}`;
+// const loginURL = `${envManager.AUTH_URL}/authn/login/${envManager.APP_NAME}`;
+const loginURL = `https://auth.ioet.com/authn/login/${envManager.APP_NAME}`;
 
 const Login = () => {
   const [showError, setShowError] = useState<string | null>(null);
