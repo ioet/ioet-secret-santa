@@ -24,6 +24,11 @@ async def get_user_permissions(http_session: ClientSession = Depends(get_session
                     'id': str(uuid()),
                 }
 
+            if not db_user:
+                db_user = {
+                    'id': str(uuid()),
+                }
+
             response =  {
                 **user,
                 "id": db_user.get('id')
