@@ -21,7 +21,7 @@ async def get_result_by_region(region: str, _=Depends(auth_with_internal_service
 
 
 @router.get("/id/{id}")
-async def get_result_by_id(id: str, _=Depends(auth_with_internal_service)) -> dict:
+async def get_result_by_id(id: str) -> dict:
     result = get_data_by_id(document='secret-santa', id=id)
     if result:
         return result
