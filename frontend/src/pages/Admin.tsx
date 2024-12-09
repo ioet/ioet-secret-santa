@@ -133,14 +133,13 @@ const Admin = () => {
                     </FormControl>
                     <Box sx={{ mt: 2 }}>
                       {
-                        selectedPlayers.map((result) => (
+                        selectedPlayers.sort(() => Math.random() - 0.5).map((result) => (
                           <Typography
                             key={result['player']['timestamp']}
                           >
                             {
-                              result['player']['name'] === 'Mari Zarraga'
-                                ? `${result['player']['name']} - No puedes saberlo :3`
-                                : `${result['player']['name']} - ${result['secret_santa']['name']}`
+                              result['secret_santa']['name'] !== 'Mari Zarraga'
+                                && `${result['player']['name']} - ${result['secret_santa']['name']}`
                             }
                           </Typography>
                         ))
