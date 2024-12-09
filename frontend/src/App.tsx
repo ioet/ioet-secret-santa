@@ -5,9 +5,7 @@ import { useUserContext } from './hooks/useUserContext';
 const App = () => {
   const { isLogged } = useUserContext();
 
-  return isLogged
-    ? <Home />
-    : <Login />
+  return isLogged ? <Home /> : <Login />
 }
 
 export default App
